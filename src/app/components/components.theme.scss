@@ -1,0 +1,5 @@
+@import './appbar/appbar.theme';
+
+@mixin components-theme($theme) {
+  @include appbar-theme($theme);
+}

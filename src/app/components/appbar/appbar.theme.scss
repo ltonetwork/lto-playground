@@ -1,0 +1,7 @@
+@mixin appbar-theme($theme) {
+  lto-appbar {
+    mat-toolbar.mat-toolbar.mat-primary {
+      background: #353535;
+    }
+  }
+}
