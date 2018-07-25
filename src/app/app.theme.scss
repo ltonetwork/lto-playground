@@ -4,7 +4,8 @@
 @include mat-core();
 
 $app-primary: mat-palette($mat-indigo);
-$app-accent: mat-palette($mat-pink, A200, A100, A400);
+$app-accent: mat-palette($mat-amber);
+// $app-accent: mat-palette($mat-amber, A200, A100, A400);
 
 $app-warn: mat-palette($mat-red);
 

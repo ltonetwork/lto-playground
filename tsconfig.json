@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "node_modules/monaco-editor"],
     "lib": ["es2017", "dom"],
     "paths": {
       "@app": ["src/app"],
