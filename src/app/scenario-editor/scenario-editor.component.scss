@@ -25,10 +25,15 @@ h1 {
   border-bottom: 1px solid #ccc;
 }
 
+section {
+  margin-bottom: 32px;
+}
+
 :host /deep/ .mat-expansion-panel {
   box-shadow: none !important;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
+  margin-bottom: 16px;
 
   .mat-expansion-panel-header-title {
     font-size: 20px;

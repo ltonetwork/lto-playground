@@ -7,13 +7,22 @@
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">
     <ng-container *ngIf="scenario$ | async as scenario">
-      <h1>Assets</h1>
-      <div class="assets">
-        <mat-expansion-panel>
+      <section *ngIf="scenario.assets">
+        <h1>Assets</h1>
+        <mat-expansion-panel *ngFor="let asset of scenario.assets | keyvalue">
           <mat-expansion-panel-header>
-            <mat-panel-title>license</mat-panel-title>
+            <mat-panel-title>{{asset.key}}</mat-panel-title>
           </mat-expansion-panel-header>
         </mat-expansion-panel>
-      </div>
+      </section>
+
+      <section *ngIf="scenario.actors">
+        <h1>Actors</h1>
+        <mat-expansion-panel *ngFor="let actor of scenario.actors | keyvalue">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{actor.value.title}}</mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </section>
     </ng-container>
   </div>
