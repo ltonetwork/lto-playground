@@ -6,16 +6,14 @@
     </ng-container>
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">
-    <h1>Assets</h1>
-    <div class="assets">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>license</mat-panel-title>
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-    </div>
-    Documentation.
-    <p>Raw data:</p>
-    <pre>{{scenario$ | async | json}}</pre>
+    <ng-container *ngIf="scenario$ | async as scenario">
+      <h1>Assets</h1>
+      <div class="assets">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>license</mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </div>
+    </ng-container>
   </div>
-</div>
