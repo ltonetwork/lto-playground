@@ -7,3 +7,74 @@
   padding: 8px 18px;
   font-size: 13px;
 }
+
+.documentation-panel {
+  box-sizing: border-box;
+  padding: 32px;
+  overflow: auto;
+
+  pre {
+    overflow: auto;
+    background: #f0f0f0;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin: 0;
+  }
+}
+
+h1 {
+  margin-top: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+section {
+  margin-bottom: 32px;
+}
+
+:host /deep/ .mat-expansion-panel {
+  box-shadow: none !important;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  .mat-expansion-panel-header-title {
+    font-size: 20px;
+  }
+}
+
+.material-section {
+  margin-bottom: 64px;
+  h1 {
+    font-size: 38px;
+    color: #202124;
+    font-weight: 400;
+    border: none;
+    margin-bottom: 16px;
+  }
+
+  p.section-description {
+    color: #5f6368;
+    font-size: 20px;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: #202124;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .content {
+    box-sizing: border-box;
+  }
+
+  /deep/ .mat-expansion-panel {
+    border: none !important;
+    margin-bottom: 0;
+  }
+}

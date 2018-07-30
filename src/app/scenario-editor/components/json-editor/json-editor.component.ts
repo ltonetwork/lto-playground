@@ -7,29 +7,25 @@ import {
   Input,
   NgZone,
   SimpleChanges,
-  forwardRef
+  forwardRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 import { MonacoEditorTheme } from './editor-theme';
 import { IMonacoSchema } from '../../interfaces';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 declare var monaco: any;
 
 @Component({
   selector: 'lto-json-editor',
   templateUrl: './json-editor.component.html',
-  styleUrls: ['./json-editor.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => JsonEditorComponent),
-      multi: true
-    }
-  ]
+  styleUrls: ['./json-editor.component.scss']
 })
-export class JsonEditorComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class JsonEditorComponent implements OnInit, OnDestroy {
   @Input() schemas!: IMonacoSchema[];
+  @Input() value: any;
+  @Output() changeScenario = new EventEmitter();
 
   public static monacoLoadPromise: Promise<any> | null = null;
 
@@ -38,7 +34,7 @@ export class JsonEditorComponent implements OnInit, OnDestroy, ControlValueAcces
   private _windowResizeSubscription: Subscription | null = null;
 
   private _value: string = ''; // JSON string of editr value
-  private _changeCallback?: Function;
+  private _currentValueObj: any;
 
   constructor(private _zone: NgZone) {}
 
@@ -58,11 +54,12 @@ export class JsonEditorComponent implements OnInit, OnDestroy, ControlValueAcces
 
   ngOnChanges(change: SimpleChanges) {
     if (change.value && change.value.currentValue) {
-      const newValue = change.value.currentValue;
-      this._value = JSON.stringify(newValue, null, 2);
+      if (this._currentValueObj !== change.value.currentValue) {
+        this._value = JSON.stringify(change.value.currentValue, null, 2);
 
-      if (this._editor) {
-        this._editor.setValue(this._value);
+        if (this._editor) {
+          this._editor.setValue(this._value);
+        }
       }
     }
   }
@@ -128,24 +125,20 @@ export class JsonEditorComponent implements OnInit, OnDestroy, ControlValueAcces
     ) as monaco.editor.IStandaloneCodeEditor;
 
     this._editor.onDidChangeModelContent(e => {
+      console.log('Changed');
       if (!this._editor) {
         // TS Will complain because _editor could be null
         return;
       }
       const value = this._editor.getValue();
-      // Changes happen outside angular so we need to inform it to run change detection
-      this._zone.run(() => {
-        try {
-          const valueObj = JSON.parse(value);
-          if (this._changeCallback) {
-            this._changeCallback(valueObj);
-          }
-        } catch (err) {
-          // Unable to parse JSON
-          // But it happens 9 times out of 10 in process of editing
-          // so we just swallow error here
-        }
-      });
+      try {
+        this._currentValueObj = JSON.parse(value);
+        this.changeScenario.next(this._currentValueObj);
+      } catch (err) {
+        // Unable to parse JSON
+        // But it happens 9 times out of 10 in process of editing
+        // so we just swallow error here
+      }
     });
 
     // refresh layout on resize event.
@@ -162,18 +155,4 @@ export class JsonEditorComponent implements OnInit, OnDestroy, ControlValueAcces
       this._editor.layout();
     }
   }
-
-  writeValue(value: any) {
-    this._value = value ? JSON.stringify(value, null, 2) : '';
-
-    if (this._editor) {
-      this._editor.setValue(this._value);
-    }
-  }
-
-  registerOnChange(fn: Function) {
-    this._changeCallback = fn;
-  }
-
-  registerOnTouched(fn: Function) {}
 }
