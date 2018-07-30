@@ -2,7 +2,7 @@
   <div class="editor-panel" fxFlex="1 1 50">
     <div class="editor-header">scenario_namme</div>
     <ng-container *ngIf="schemas$ | async as schemas">
-      <lto-json-editor [schemas]="schemas"></lto-json-editor>
+      <lto-json-editor [schemas]="schemas" [(ngModel)]="scenario"></lto-json-editor>
     </ng-container>
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">

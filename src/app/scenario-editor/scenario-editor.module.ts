@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 import { WaffleModule } from '@waffle/core';
 import { JsonEditorModule } from './components';
@@ -11,6 +12,7 @@ import { LoadSchemaEffect } from './effects';
 @NgModule({
   imports: [
     SharedModule,
+    FormsModule,
     JsonEditorModule,
     WaffleModule.forFeature('scenario-editor', [ScenarioEditorStore], [LoadSchemaEffect]),
     RouterModule.forChild([

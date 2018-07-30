@@ -1,6 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+  Input,
+  forwardRef
+} from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 import { MonacoEditorTheme } from './editor-theme';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMonacoSchema } from '../../interfaces';
 
 declare var monaco: any;
@@ -8,15 +17,24 @@ declare var monaco: any;
 @Component({
   selector: 'lto-json-editor',
   templateUrl: './json-editor.component.html',
-  styleUrls: ['./json-editor.component.scss']
+  styleUrls: ['./json-editor.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => JsonEditorComponent),
+      multi: true
+    }
+  ]
 })
-export class JsonEditorComponent implements OnInit, OnDestroy {
+export class JsonEditorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() schemas!: IMonacoSchema[];
   public static monacoLoadPromise: Promise<any> | null = null;
 
   @ViewChild('editorContainer') private _editorContainer!: ElementRef;
   private _editor: monaco.editor.IStandaloneCodeEditor | null = null; // monaco editor instance
   private _windowResizeSubscription: Subscription | null = null;
+
+  private _value: string = ''; // JSON string of editr value
 
   constructor() {}
 
@@ -73,12 +91,7 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
   private _initMonaco() {
     const monaco = (window as any).monaco;
     const fileId = 'foo.json';
-    var jsonCode = [
-      '{',
-      '    "$schema": "https://specs.livecontracts.io/v0.1.0/scenario/schema.json#"',
-      '}'
-    ].join('\n');
-    var model = monaco.editor.createModel(jsonCode, 'json', fileId);
+    var model = monaco.editor.createModel(this._value, 'json', fileId);
     monaco.editor.defineTheme('ltoTheme', MonacoEditorTheme);
     monaco.editor.setTheme('ltoTheme');
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
@@ -117,4 +130,19 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
       this._editor.layout();
     }
   }
+
+  /**
+   * ControlValueAccessor
+   */
+
+  writeValue(value: any) {
+    this._value = value ? JSON.stringify(value, null, 2) : '';
+    if (this._editor) {
+      this._editor.setValue(this._value);
+    }
+  }
+
+  registerOnChange(fn: Function) {}
+
+  registerOnTouched(fn: Function) {}
 }
