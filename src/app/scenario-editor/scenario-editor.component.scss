@@ -14,9 +14,13 @@
   overflow: auto;
 
   pre {
-    max-width: 500px;
-
     overflow: auto;
+    background: #f0f0f0;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin: 0;
   }
 }
 
@@ -37,5 +41,40 @@ section {
 
   .mat-expansion-panel-header-title {
     font-size: 20px;
+  }
+}
+
+.material-section {
+  margin-bottom: 64px;
+  h1 {
+    font-size: 38px;
+    color: #202124;
+    font-weight: 400;
+    border: none;
+    margin-bottom: 16px;
+  }
+
+  p.section-description {
+    color: #5f6368;
+    font-size: 20px;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: #202124;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .content {
+    box-sizing: border-box;
+  }
+
+  /deep/ .mat-expansion-panel {
+    border: none !important;
+    margin-bottom: 0;
   }
 }

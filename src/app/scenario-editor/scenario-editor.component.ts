@@ -43,4 +43,8 @@ export class ScenarioEditorComponent implements AfterViewInit, OnDestroy {
   updateScenario(value: any) {
     this._dispatcher.dispatch(new UpdateScenario({ scenario: value }));
   }
+
+  trackByFn(index: number, item: any) {
+    return item.key;
+  }
 }
