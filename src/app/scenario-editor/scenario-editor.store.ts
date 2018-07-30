@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@waffle/core';
+import { Store, Action } from '@waffle/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UpdateScenario } from './actions';
 import { IMonacoSchema } from './interfaces';
 import {
   JsonSchema,
@@ -17,15 +18,18 @@ import {
 
 interface IScenarioEditorState {
   schemas: IMonacoSchema[] | null;
+  scenario: any;
 }
 
 @Injectable()
 export class ScenarioEditorStore extends Store<IScenarioEditorState> {
   schema$: Observable<IMonacoSchema[] | null>;
+  scenario$: Observable<any>;
 
   constructor() {
     const fileMatch = ['*.json'];
     super('ScenarioEditorStore', {
+      scenario: {},
       schemas: [
         {
           uri: JsonSchema.$id,
@@ -76,5 +80,14 @@ export class ScenarioEditorStore extends Store<IScenarioEditorState> {
     });
 
     this.schema$ = this.state$.pipe(map(state => state.schemas));
+    this.scenario$ = this.state$.pipe(map(state => state.scenario));
+  }
+
+  @Action(UpdateScenario)
+  UpdateScenario(state: IScenarioEditorState, action: UpdateScenario): IScenarioEditorState {
+    return {
+      ...state,
+      scenario: action.payload.scenario
+    };
   }
 }
