@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ScenarioEditorStore } from './scenario-editor.store';
+import { Observable } from 'rxjs';
+import { IMonacoSchema } from './interfaces';
 
 @Component({
   selector: 'lto-scenario-editor',
@@ -6,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scenario-editor.component.scss']
 })
 export class ScenarioEditorComponent implements OnInit {
+  schemas$: Observable<IMonacoSchema[] | null>;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(_store: ScenarioEditorStore) {
+    this.schemas$ = _store.schema$;
   }
 
+  ngOnInit() {}
 }

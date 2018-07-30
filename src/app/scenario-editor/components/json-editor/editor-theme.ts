@@ -9,6 +9,13 @@
 export const MonacoEditorTheme: monaco.editor.IStandaloneThemeData = {
   base: 'vs-dark',
   inherit: true,
+  rules: [],
+  colors: {}
+};
+
+export const MonacoEditorTheme_1: monaco.editor.IStandaloneThemeData = {
+  base: 'vs-dark',
+  inherit: true,
   rules: [
     { token: 'delimeter.bracket.json', foreground: 'd9d7cd' },
     { token: 'string.key.json', foreground: '09d2e9' },

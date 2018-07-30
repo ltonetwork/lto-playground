@@ -37,9 +37,37 @@ class WaffleRootModule {}
   exports: []
 })
 export class WaffleModule {
-  static forRoot(stores: any[] = []): ModuleWithProviders {
+  static forRoot(stores: any[] = [], effects: any[] = []): ModuleWithProviders {
     return {
-      ngModule: WaffleRootModule
+      ngModule: WaffleFeatureModule,
+      providers: [
+        Manager,
+        Dispatcher,
+        {
+          provide: NAMESPACE,
+          useValue: 'global'
+        },
+        {
+          provide: ACTIONS$,
+          useValue: new Subject()
+        },
+        {
+          provide: ACTION_COMPLETE$,
+          useValue: new Subject()
+        },
+        {
+          provide: STORES,
+          useFactory: instancesProvider,
+          deps: stores
+        },
+        {
+          provide: EFFECTS,
+          useFactory: instancesProvider,
+          deps: effects
+        },
+        ...effects,
+        ...stores
+      ]
     };
   }
 
@@ -51,6 +79,7 @@ export class WaffleModule {
     return {
       ngModule: WaffleFeatureModule,
       providers: [
+        Dispatcher,
         {
           provide: NAMESPACE,
           useValue: namespace

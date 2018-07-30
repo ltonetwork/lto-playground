@@ -10,27 +10,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/monaco-editor"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types", "node_modules/monaco-editor"],
+    "lib": ["es2017", "dom"],
     "paths": {
-      "@app": [
-        "src/app"
-      ],
-      "@app/*": [
-        "src/app/*"
-      ],
-      "waffle": [
-        "dist/waffle"
-      ],
-      "waffle/*": [
-        "dist/waffle/*"
-      ]
+      "@app": ["src/app"],
+      "@app/*": ["src/app/*"],
+      "@waffle/core": ["projects/waffle/src"]
     }
   }
 }

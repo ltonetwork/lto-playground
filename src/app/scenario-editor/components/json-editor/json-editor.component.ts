@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 import { MonacoEditorTheme } from './editor-theme';
+import { IMonacoSchema } from '../../interfaces';
+
+declare var monaco: any;
 
 @Component({
   selector: 'lto-json-editor',
@@ -8,6 +11,7 @@ import { MonacoEditorTheme } from './editor-theme';
   styleUrls: ['./json-editor.component.scss']
 })
 export class JsonEditorComponent implements OnInit, OnDestroy {
+  @Input() schemas!: IMonacoSchema[];
   public static monacoLoadPromise: Promise<any> | null = null;
 
   @ViewChild('editorContainer') private _editorContainer!: ElementRef;
@@ -68,18 +72,24 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
 
   private _initMonaco() {
     const monaco = (window as any).monaco;
+    const fileId = 'foo.json';
+    var jsonCode = ['{', '    "p1": "v3",', '    "p2": false', '}'].join('\n');
+    var model = monaco.editor.createModel(jsonCode, 'json', fileId);
     monaco.editor.defineTheme('ltoTheme', MonacoEditorTheme);
     monaco.editor.setTheme('ltoTheme');
-
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      schemas: this.schemas
+    });
     if (!monaco) {
       throw 'window.monaco is not defined! Make sure that you load monaco-editro first!';
     }
 
     const options: monaco.editor.IEditorConstructionOptions = {
       language: 'json',
-      fontSize: 14
+      fontSize: 14,
+      model
     };
-
     this._editor = monaco.editor.create(
       this._editorContainer.nativeElement,
       options
@@ -93,7 +103,6 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
     if (this._windowResizeSubscription) {
       this._windowResizeSubscription.unsubscribe();
     }
-
     this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(() =>
       this._layoutEditor()
     );
