@@ -20,4 +20,9 @@ export class ScenarioEditorComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  updateScenario(value: any) {
+    console.log('New value: ', value);
+    this.scenario = value;
+  }
 }
