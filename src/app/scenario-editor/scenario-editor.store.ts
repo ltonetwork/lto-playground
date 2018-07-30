@@ -3,7 +3,17 @@ import { Store } from '@waffle/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IMonacoSchema } from './interfaces';
-import { JsonSchema, ScenarioSchema, ActionSchema, DataInstructionsSchema } from './schemas';
+import {
+  JsonSchema,
+  ScenarioSchema,
+  ActionSchema,
+  DataInstructionsSchema,
+  DocumentSchema,
+  EventChainSchema,
+  CommentSchema,
+  IdentitySchema,
+  FormSchema
+} from './schemas';
 
 interface IScenarioEditorState {
   schemas: IMonacoSchema[] | null;
@@ -36,6 +46,31 @@ export class ScenarioEditorStore extends Store<IScenarioEditorState> {
           uri: DataInstructionsSchema.$id,
           fileMatch,
           schema: DataInstructionsSchema
+        },
+        {
+          uri: DocumentSchema.$id,
+          fileMatch,
+          schema: DocumentSchema
+        },
+        {
+          uri: EventChainSchema.$id,
+          fileMatch,
+          schema: EventChainSchema
+        },
+        {
+          uri: CommentSchema.$id,
+          fileMatch,
+          schema: CommentSchema
+        },
+        {
+          uri: IdentitySchema.$id,
+          fileMatch,
+          schema: IdentitySchema
+        },
+        {
+          uri: FormSchema.$id,
+          fileMatch,
+          schema: FormSchema
         }
       ]
     });

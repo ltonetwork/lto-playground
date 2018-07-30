@@ -2,3 +2,8 @@ export * from './json.schema';
 export * from './scenario.schema';
 export * from './action.schema';
 export * from './data-instructions.schema';
+export * from './document.schema';
+export * from './event-chain.schema';
+export * from './comment.schema';
+export * from './identity.schema';
+export * from './form.schema';

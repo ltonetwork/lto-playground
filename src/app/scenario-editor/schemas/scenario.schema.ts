@@ -69,7 +69,7 @@ export const ScenarioSchema = {
       type: 'object',
       patternProperties: {
         '^\\w+$': {
-          $ref: 'https://specs.livecontracts.io/v0.1.0/10-action/schema.json#definition'
+          $ref: 'https://specs.livecontracts.io/v0.1.0/action/schema.json#definitions'
         }
       }
     },
@@ -78,7 +78,7 @@ export const ScenarioSchema = {
       type: 'object',
       patternProperties: {
         '^\\w+$': {
-          $ref: '#state'
+          $ref: '#definitions/state'
         }
       }
     }
@@ -121,7 +121,7 @@ export const ScenarioSchema = {
           type: 'object',
           patternProperties: {
             '^\\w+$': {
-              $ref: '#response'
+              $ref: '#/definitions/response'
             }
           },
           default: {
@@ -159,12 +159,12 @@ export const ScenarioSchema = {
           description: 'Update instruction or set of instructions',
           oneOf: [
             {
-              $ref: '#update-instruction'
+              $ref: '#/definitions/update_instruction'
             },
             {
               type: 'array',
               items: {
-                $ref: '#update'
+                $ref: '#/definitions/update'
               }
             }
           ]
@@ -233,7 +233,7 @@ export const ScenarioSchema = {
           description: 'Set of state transitions resulting from an action response',
           type: 'array',
           items: {
-            $ref: '#transition'
+            $ref: '#/definitions/transition'
           }
         },
         timeout: {
@@ -242,6 +242,11 @@ export const ScenarioSchema = {
           pattern: '^\\d+[ymdwhis](\\s\\d+[ymdwhis])*$'
         }
       }
+    },
+    update: {
+      $id: '#update',
+      description: 'TODO: Define this property',
+      type: 'object'
     },
     transition: {
       $id: '#transition',

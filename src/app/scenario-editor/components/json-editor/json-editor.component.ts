@@ -73,7 +73,11 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
   private _initMonaco() {
     const monaco = (window as any).monaco;
     const fileId = 'foo.json';
-    var jsonCode = ['{', '    "p1": "v3",', '    "p2": false', '}'].join('\n');
+    var jsonCode = [
+      '{',
+      '    "$schema": "https://specs.livecontracts.io/v0.1.0/scenario/schema.json#"',
+      '}'
+    ].join('\n');
     var model = monaco.editor.createModel(jsonCode, 'json', fileId);
     monaco.editor.defineTheme('ltoTheme', MonacoEditorTheme);
     monaco.editor.setTheme('ltoTheme');
