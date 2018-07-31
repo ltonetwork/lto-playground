@@ -19,7 +19,7 @@ export class LoadSchemaEffect {
       this._http.get('https://specs.livecontracts.io/action/schema.json'),
       this._http.get('https://specs.livecontracts.io/comment/schema.json'),
       // this._http.get('https://specs.livecontracts.io/data-instruction/schema.json'),
-      of(DataInstructionsSchema),
+      of(DataInstructionsSchema), // TODO: Fix online version of DataInstruction
       this._http.get('https://specs.livecontracts.io/document/schema.json'),
       this._http.get('https://specs.livecontracts.io/event-chain/schema.json'),
       this._http.get('https://specs.livecontracts.io/form/schema.json'),

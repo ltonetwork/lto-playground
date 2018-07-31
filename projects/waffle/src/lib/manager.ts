@@ -5,7 +5,7 @@ import { getMatadata, ACTIONS_METADATA_KEY, EFFECTS_METADATA_KEY } from './metad
 import { ACTIONS$, ACTION_COMPLETE$ } from './tokens';
 import { ActionContext } from './types/action-context';
 import { Action } from './types/action';
-import { map, catchError, filter } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { StoreRegistered } from './internal/actions';
 
 interface Reactions {

@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { ScenarioEditorStore } from './scenario-editor.store';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { Dispatcher } from '@waffle/core';
