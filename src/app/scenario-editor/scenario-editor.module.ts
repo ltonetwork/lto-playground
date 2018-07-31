@@ -3,11 +3,13 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 import { WaffleModule } from '@waffle/core';
+import { LtoFormsModule } from '@lto/forms';
 import {
   MatExpansionModule,
   MatDividerModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTabsModule
 } from '@angular/material';
 
 import { JsonEditorModule } from './components';
@@ -19,10 +21,12 @@ import { LoadSchemaEffect } from './effects';
 @NgModule({
   imports: [
     SharedModule,
+    LtoFormsModule,
     MatExpansionModule,
     MatDividerModule,
     MatIconModule,
     MatButtonModule,
+    MatTabsModule,
     FormsModule,
     JsonEditorModule,
     WaffleModule.forFeature('scenario-editor', [ScenarioEditorStore], [LoadSchemaEffect]),

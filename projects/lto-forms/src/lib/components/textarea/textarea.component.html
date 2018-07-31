@@ -1,0 +1,4 @@
+<mat-form-field>
+  <textarea matInput [placeholder]="definition.label" [formControl]="control" rows="5"></textarea>
+</mat-form-field>
+<mat-icon *ngIf="definition.helptext" [matTooltip]="definition.helptext">help_outline</mat-icon>

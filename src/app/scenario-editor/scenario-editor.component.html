@@ -15,42 +15,64 @@
         <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', items: scenario.actors}"></ng-container>
       </ng-container>
 
-      <ng-container *ngIf="scenario.assets">
-        <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
+      <ng-container *ngIf="scenario.definitions">
+        <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
       </ng-container>
     </ng-container>
   </div>
+</div>
 
-  <ng-template let-section="section" let-items="items" #section>
-    <section>
-      <h1>{{section}}</h1>
-      <mat-expansion-panel *ngFor="let item of items | keyvalue; trackBy: trackByFn">
-        <mat-expansion-panel-header>
-          <mat-panel-title>{{item.value.title || item.key}}</mat-panel-title>
-        </mat-expansion-panel-header>
-        <pre>{{item.value | json}}</pre>
-      </mat-expansion-panel>
-    </section>
-  </ng-template>
+<ng-template #materialSection let-section="section" let-items="items">
+  <section class="material-section">
+    <h1>{{section}}</h1>
+    <p class="section-description">Section description to explain users what does it mean?</p>
+    <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
+      <div class="content">
+        <h2 fxLayout="row" fxLayoutAlign="start center" (click)="pannel.toggle()">
+          <span fxFlex="1 1 auto">{{item.value.title || item.key}}</span>
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </h2>
+        <mat-expansion-panel #pannel>
+          <div>
+            <pre>{{item.value | json}}</pre>
+          </div>
+        </mat-expansion-panel>
+      </div>
 
-  <ng-template #materialSection let-section="section" let-items="items">
-    <section class="material-section">
-      <h1>{{section}}</h1>
-      <p class="section-description">Section description to explain users what does it mean?</p>
-      <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
-        <div class="content">
-          <h2 fxLayout="row" fxLayoutAlign="start center" (click)="pannel.toggle()">
-            <span fxFlex="1 1 auto">{{item.value.title || item.key}}</span>
-            <mat-icon>keyboard_arrow_down</mat-icon>
-          </h2>
-          <mat-expansion-panel #pannel>
-            <div>
-              <pre>{{item.value | json}}</pre>
-            </div>
-          </mat-expansion-panel>
-        </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </section>
+</ng-template>
 
-        <mat-divider></mat-divider>
-      </ng-container>
-    </section>
-  </ng-template>
+<ng-template #definitionTpl let-items="items">
+  <section class="material-section">
+    <h1>Definitions</h1>
+    <p class="section-description">Some explanation about definitions</p>
+    <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
+      <div class="content">
+        <h2 fxLayout="row" fxLayoutAlign="start center" (click)="pannel.toggle()">
+          <span fxFlex="1 1 auto">{{item.value.title || item.key}}</span>
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </h2>
+        <mat-expansion-panel #pannel>
+          <ng-container *ngIf="item.value.$schema">
+            <mat-tab-group>
+              <mat-tab label="Code">
+                <pre>{{item.value | json}}</pre>
+              </mat-tab>
+              <mat-tab label="Preview">
+                <lto-form></lto-form>
+              </mat-tab>
+            </mat-tab-group>
+          </ng-container>
+          <div *ngIf="!item.value.$schema">
+            <pre>{{item.value | json}}</pre>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+      <mat-divider></mat-divider>
+    </ng-container>
+  </section>
+
+</ng-template>

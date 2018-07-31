@@ -1,0 +1,4 @@
+<mat-form-field>
+  <input [type]="type" matInput [placeholder]="definition.label" [formControl]="control">
+</mat-form-field>
+<mat-icon *ngIf="definition.helptext" [matTooltip]="definition.helptext">help_outline</mat-icon>

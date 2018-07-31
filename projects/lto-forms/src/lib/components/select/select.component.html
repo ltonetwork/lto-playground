@@ -1,0 +1,6 @@
+<mat-form-field>
+  <mat-select [placeholder]="definition.label" [formControl]="control" [multiple]="definition.multiselect">
+    <mat-option *ngFor="let option of definition.options" [value]="option.value">{{option.label}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-icon *ngIf="definition.helptext" [matTooltip]="definition.helptext">help_outline</mat-icon>

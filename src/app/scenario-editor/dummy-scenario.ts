@@ -554,6 +554,7 @@ export const DummyScenario = {
   definitions: {
     request_form: {
       title: 'Quotation request form',
+      $schema: 'http://specs.legalthings.one/draft-01/form/schema.json',
       definition: [
         {
           fields: [
@@ -588,6 +589,7 @@ export const DummyScenario = {
     },
     client_form: {
       title: 'Enter client information',
+      $schema: 'http://specs.legalthings.one/draft-01/form/schema.json',
       definition: [
         {
           fields: [
