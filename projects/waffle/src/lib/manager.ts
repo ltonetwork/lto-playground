@@ -98,7 +98,6 @@ export class Manager {
         filter(state => !!state[namespace]),
         filter(state => !!state[namespace][instance.name]),
         map(state => {
-          console.log('Have a new state');
           return state[namespace][instance.name];
         })
       )

@@ -125,7 +125,6 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
     ) as monaco.editor.IStandaloneCodeEditor;
 
     this._editor.onDidChangeModelContent(e => {
-      console.log('Changed');
       if (!this._editor) {
         // TS Will complain because _editor could be null
         return;
