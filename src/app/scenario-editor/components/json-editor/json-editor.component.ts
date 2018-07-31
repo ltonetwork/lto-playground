@@ -129,6 +129,8 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
         return;
       }
       const value = this._editor.getValue();
+      const editor = this._editor;
+      debugger;
       try {
         this._currentValueObj = JSON.parse(value);
         this.changeScenario.next(this._currentValueObj);

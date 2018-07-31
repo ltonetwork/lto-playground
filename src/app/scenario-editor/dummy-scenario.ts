@@ -551,7 +551,63 @@ export const DummyScenario = {
       }
     }
   },
-  definitions: {},
+  definitions: {
+    request_form: {
+      title: 'Quotation request form',
+      definition: [
+        {
+          fields: [
+            {
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#external-select',
+              label: 'Supplier',
+              name: 'supplier',
+              url: 'https://jsonplaceholder.typicode.com/users',
+              optionText: 'name',
+              optionValue: '{ name, email, phone }',
+              required: true
+            },
+            {
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#textarea',
+              label: 'Description',
+              name: 'description',
+              helptip: 'Which service would you like a quotation for?'
+            },
+            {
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#select',
+              label: 'Urgency',
+              name: 'urgency',
+              options: [
+                { value: 'normal', label: 'Normal' },
+                { value: 'high', label: 'High' },
+                { value: 'critical', label: 'Critical' }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    client_form: {
+      title: 'Enter client information',
+      definition: [
+        {
+          fields: [
+            {
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#text',
+              label: 'Name',
+              name: 'name',
+              required: true
+            },
+            {
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#email',
+              label: 'E-mail',
+              name: 'email',
+              required: true
+            }
+          ]
+        }
+      ]
+    }
+  },
   info: {},
   permissions: {
     '*': ['read'],
