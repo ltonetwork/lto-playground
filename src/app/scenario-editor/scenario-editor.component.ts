@@ -1,12 +1,11 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ScenarioEditorStore } from './scenario-editor.store';
 import { Observable, Subscription, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { Dispatcher } from '@waffle/core';
 import { IMonacoSchema } from './interfaces';
 import { UpdateScenario, LoadSchemas } from './actions';
 import { DummyScenario } from './dummy-scenario';
-import { JsonEditorComponent } from './components';
-import { debounceTime } from '../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'lto-scenario-editor',
@@ -14,7 +13,6 @@ import { debounceTime } from '../../../node_modules/rxjs/operators';
   styleUrls: ['./scenario-editor.component.scss']
 })
 export class ScenarioEditorComponent implements OnDestroy {
-  @ViewChild('editor') editor?: JsonEditorComponent;
   schemas$: Observable<IMonacoSchema[] | null>;
 
   scenario$: Observable<any>;
