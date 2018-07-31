@@ -1,31 +1,34 @@
-import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ScenarioEditorStore } from './scenario-editor.store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { Dispatcher } from '@waffle/core';
 import { IMonacoSchema } from './interfaces';
-import { UpdateScenario } from './actions';
+import { UpdateScenario, LoadSchemas } from './actions';
 import { DummyScenario } from './dummy-scenario';
-import { JsonEditorComponent } from './components';
-import { debounceTime } from '../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'lto-scenario-editor',
   templateUrl: './scenario-editor.component.html',
   styleUrls: ['./scenario-editor.component.scss']
 })
-export class ScenarioEditorComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('editor') editor!: JsonEditorComponent;
+export class ScenarioEditorComponent implements OnDestroy {
   schemas$: Observable<IMonacoSchema[] | null>;
 
   scenario$: Observable<any>;
+  private _scenarioChanges$: Subject<any> = new Subject();
   private _editorSubscription?: Subscription;
 
   constructor(_store: ScenarioEditorStore, private _dispatcher: Dispatcher) {
     this.schemas$ = _store.schema$;
     this.scenario$ = _store.scenario$;
 
+    this._editorSubscription = this._scenarioChanges$
+      .pipe(debounceTime(300))
+      .subscribe(scenario => this.updateScenario(scenario));
+
     // Set dummy scenario
-    _dispatcher.dispatch(new UpdateScenario({ scenario: DummyScenario }));
+    _dispatcher.dispatch([new UpdateScenario({ scenario: DummyScenario }), new LoadSchemas()]);
   }
 
   ngOnDestroy() {
@@ -34,14 +37,12 @@ export class ScenarioEditorComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit() {
-    this.editor.changeScenario
-      .pipe(debounceTime(300))
-      .subscribe(scenario => this.updateScenario(scenario));
+  scenarioChanged(scenario: any) {
+    this._scenarioChanges$.next(scenario);
   }
 
-  updateScenario(value: any) {
-    this._dispatcher.dispatch(new UpdateScenario({ scenario: value }));
+  updateScenario(scenario: any) {
+    this._dispatcher.dispatch(new UpdateScenario({ scenario }));
   }
 
   trackByFn(index: number, item: any) {

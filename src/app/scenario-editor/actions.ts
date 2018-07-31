@@ -1,10 +1,10 @@
-export class LoadSchema {
+export class LoadSchemas {
   static readonly type = 'LOAD_SCHEMA';
 }
 
-export class SetSchema {
+export class SetSchemas {
   static readonly type = 'SET_SCHEMA';
-  constructor(public payload: { schema: object }) {}
+  constructor(public payload: { schemas: any[] }) {}
 }
 
 export class UpdateScenario {
