@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule, MatButtonModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatIconModule,
+  MatTooltipModule
+} from '@angular/material';
 import { AppbarComponent } from './appbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
@@ -9,6 +14,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     MatToolbarModule,
+    MatIconModule,
+    MatTooltipModule,
     RouterModule.forChild([]),
     FlexLayoutModule,
     MatButtonModule

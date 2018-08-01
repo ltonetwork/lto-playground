@@ -1,5 +1,5 @@
 <div class="application-content" fxLayout="column">
-  <lto-appbar></lto-appbar>
+  <lto-appbar [markers]="markers$ | async" (export)="export()"></lto-appbar>
   <div class="router-content" fxFlex="1 1 auto" fxLayout="row">
     <router-outlet></router-outlet>
   </div>

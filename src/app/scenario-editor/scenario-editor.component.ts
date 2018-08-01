@@ -5,6 +5,7 @@ import { debounceTime } from 'rxjs/operators';
 import { Dispatcher } from '@waffle/core';
 import { IMonacoSchema } from './interfaces';
 import { UpdateScenario, LoadSchemas, ShowFormData } from './actions';
+import { UpdateEditorMarkers } from '@app/actions';
 import { DummyScenario } from './dummy-scenario';
 import { trigger, query, stagger, animate, style, transition } from '@angular/animations';
 
@@ -68,5 +69,9 @@ export class ScenarioEditorComponent implements OnDestroy {
 
   showFormData(data: any) {
     this._dispatcher.dispatch(new ShowFormData({ data }));
+  }
+
+  updateEditrMarkers(markers: any[]) {
+    this._dispatcher.dispatch(new UpdateEditorMarkers({ markers }));
   }
 }

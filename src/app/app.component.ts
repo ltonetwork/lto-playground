@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AppStateStore } from './app.store';
+import { Dispatcher } from '@waffle/core';
+import { DownloadJSON } from './scenario-editor/actions';
 
 @Component({
   selector: 'lto-root',
@@ -6,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'lto';
+  markers$ = this._appStore.markers$;
+
+  constructor(private _appStore: AppStateStore, private _dispatcher: Dispatcher) {}
+
+  export() {
+    this._dispatcher.dispatch(new DownloadJSON());
+  }
 }

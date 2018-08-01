@@ -16,3 +16,7 @@ export class ShowFormData {
   static readonly type = 'ShowFormData';
   constructor(public payload: { data: any }) {}
 }
+
+export class DownloadJSON {
+  static readonly type = 'DownloadJSON';
+}

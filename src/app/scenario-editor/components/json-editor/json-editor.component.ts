@@ -10,7 +10,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { Subscription, fromEvent } from 'rxjs';
+import { Subscription, fromEvent, interval } from 'rxjs';
 import { MonacoEditorTheme } from './editor-theme';
 import { IMonacoSchema } from '../../interfaces';
 
@@ -25,12 +25,14 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
   @Input() schemas!: IMonacoSchema[];
   @Input() value: any;
   @Output() changeScenario = new EventEmitter();
+  @Output() markers = new EventEmitter();
 
   public static monacoLoadPromise: Promise<any> | null = null;
 
   @ViewChild('editorContainer') private _editorContainer!: ElementRef;
   private _editor: monaco.editor.IStandaloneCodeEditor | null = null; // monaco editor instance
   private _windowResizeSubscription: Subscription | null = null;
+  private _markerPoller: Subscription | null = null;
 
   private _value: string = ''; // JSON string of editr value
   private _currentValueObj: any;
@@ -48,6 +50,10 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
 
     if (this._windowResizeSubscription) {
       this._windowResizeSubscription.unsubscribe();
+    }
+
+    if (this._markerPoller) {
+      this._markerPoller.unsubscribe();
     }
   }
 
@@ -123,14 +129,26 @@ export class JsonEditorComponent implements OnInit, OnDestroy {
       options
     ) as monaco.editor.IStandaloneCodeEditor;
 
+    // Monaco have no API to inform us on marker/errors changes
+    // so lets do good old interval polling
+    this._zone.runOutsideAngular(() => {
+      let oldMarkers: any = [];
+      this._markerPoller = interval(300).subscribe(() => {
+        const markers = monaco.editor.getModelMarkers() || [];
+        if (markers.length !== oldMarkers.length) {
+          oldMarkers = markers;
+          this.markers.next(markers);
+        }
+      });
+    });
+
     this._editor.onDidChangeModelContent(e => {
       if (!this._editor) {
         // TS Will complain because _editor could be null
         return;
       }
       const value = this._editor.getValue();
-      const editor = this._editor;
-      debugger;
+
       try {
         this._currentValueObj = JSON.parse(value);
         this.changeScenario.next(this._currentValueObj);

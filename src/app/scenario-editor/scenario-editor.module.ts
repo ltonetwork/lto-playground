@@ -18,7 +18,7 @@ import { FormDataModule } from './modals';
 
 import { ScenarioEditorComponent } from './scenario-editor.component';
 import { ScenarioEditorStore } from './scenario-editor.store';
-import { LoadSchemaEffect, ShowFormDataEffect } from './effects';
+import { LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect } from './effects';
 
 @NgModule({
   imports: [
@@ -36,7 +36,7 @@ import { LoadSchemaEffect, ShowFormDataEffect } from './effects';
     WaffleModule.forFeature(
       'scenario-editor',
       [ScenarioEditorStore],
-      [LoadSchemaEffect, ShowFormDataEffect]
+      [LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect]
     ),
     RouterModule.forChild([
       {

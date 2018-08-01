@@ -2,7 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { CoreModule } from './core';
+import { HttpClientModule } from '@angular/common/http';
+import { WaffleModule } from '@waffle/core';
+import { AppStateStore } from './app.store';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppbarModule } from './components';
@@ -15,8 +18,9 @@ import { SharedModule } from './shared';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    WaffleModule.forRoot([AppStateStore]),
     SharedModule,
-    CoreModule,
     AppRoutingModule,
     AppbarModule
   ],
