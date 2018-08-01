@@ -69,10 +69,10 @@
                       {{item.value.title}}
                     </mat-card-title>
                     <mat-card-content>
-                      <lto-form [schema]="item.value"></lto-form>
+                      <lto-form [schema]="item.value" #form></lto-form>
                     </mat-card-content>
                     <mat-card-actions fxLayout="row" fxLayoutAlign="end">
-                      <button mat-flat-button color="primary">Submit</button>
+                      <button mat-flat-button color="primary" (click)="showFormData(form.value)">Submit</button>
                     </mat-card-actions>
                   </mat-card>
                 </div>

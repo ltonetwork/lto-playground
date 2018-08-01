@@ -4,7 +4,7 @@ import { Observable, Subscription, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Dispatcher } from '@waffle/core';
 import { IMonacoSchema } from './interfaces';
-import { UpdateScenario, LoadSchemas } from './actions';
+import { UpdateScenario, LoadSchemas, ShowFormData } from './actions';
 import { DummyScenario } from './dummy-scenario';
 
 @Component({
@@ -47,5 +47,9 @@ export class ScenarioEditorComponent implements OnDestroy {
 
   trackByFn(index: number, item: any) {
     return item.key;
+  }
+
+  showFormData(data: any) {
+    this._dispatcher.dispatch(new ShowFormData({ data }));
   }
 }

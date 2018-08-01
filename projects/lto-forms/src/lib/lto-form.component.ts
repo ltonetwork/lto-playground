@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, TemplateRef, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, of, merge } from 'rxjs';
+import { Observable, of, merge, Subscription } from 'rxjs';
 import { map, shareReplay, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { clean, interpolate } from './utils';
 
@@ -9,10 +9,11 @@ import { clean, interpolate } from './utils';
   templateUrl: './lto-form.component.html',
   styleUrls: ['./lto-form.component.scss']
 })
-export class LtoFormComponent implements OnInit {
+export class LtoFormComponent implements OnInit, OnDestroy {
   @Input() schema: any;
   @Input() initialValue: any = {}; // By default it is empty object.
   @Output() valueChange: Observable<any>;
+  value: any;
 
   form: FormGroup = new FormGroup({});
   formData$: Observable<any>; // Clean form data
@@ -29,6 +30,8 @@ export class LtoFormComponent implements OnInit {
   @ViewChild('checkboxTpl') checkboxTpl!: TemplateRef<any>;
   @ViewChild('groupTpl') groupTpl!: TemplateRef<any>;
   @ViewChild('expressionTpl') expressionTpl!: TemplateRef<any>;
+
+  private _valueSubscription: Subscription;
 
   constructor() {
     this.formData$ = this.form.valueChanges.pipe(
@@ -62,9 +65,15 @@ export class LtoFormComponent implements OnInit {
     // Put this event in the end of 'JS queue' to fire only one event
     // With all fields inside
     this.valueChange = this.formData$.pipe(debounceTime(0));
+
+    this._valueSubscription = this.valueChange.subscribe(value => (this.value = value));
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this._valueSubscription.unsubscribe();
+  }
 
   getCondition$(condition: string, group: string = ''): Observable<boolean> {
     const key = condition + group;

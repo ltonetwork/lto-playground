@@ -14,10 +14,11 @@ import {
 } from '@angular/material';
 
 import { JsonEditorModule } from './components';
+import { FormDataModule } from './modals';
 
 import { ScenarioEditorComponent } from './scenario-editor.component';
 import { ScenarioEditorStore } from './scenario-editor.store';
-import { LoadSchemaEffect } from './effects';
+import { LoadSchemaEffect, ShowFormDataEffect } from './effects';
 
 @NgModule({
   imports: [
@@ -31,7 +32,12 @@ import { LoadSchemaEffect } from './effects';
     MatCardModule,
     FormsModule,
     JsonEditorModule,
-    WaffleModule.forFeature('scenario-editor', [ScenarioEditorStore], [LoadSchemaEffect]),
+    FormDataModule,
+    WaffleModule.forFeature(
+      'scenario-editor',
+      [ScenarioEditorStore],
+      [LoadSchemaEffect, ShowFormDataEffect]
+    ),
     RouterModule.forChild([
       {
         path: '',
