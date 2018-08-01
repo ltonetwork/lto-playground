@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule } from '@angular/material';
 import { AppbarComponent } from './appbar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule, RouterModule.forChild([])],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    RouterModule.forChild([]),
+    FlexLayoutModule,
+    MatButtonModule
+  ],
   declarations: [AppbarComponent],
   exports: [AppbarComponent]
 })

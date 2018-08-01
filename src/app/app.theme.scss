@@ -18,4 +18,5 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 .mat-button,
 .mat-dialog-container {
   border-radius: 4px !important;
+  font-weight: 400 !important;
 }
