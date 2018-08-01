@@ -3,29 +3,41 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 import { WaffleModule } from '@waffle/core';
+import { LtoFormsModule } from '@lto/forms';
 import {
   MatExpansionModule,
   MatDividerModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTabsModule,
+  MatCardModule
 } from '@angular/material';
 
 import { JsonEditorModule } from './components';
+import { FormDataModule } from './modals';
 
 import { ScenarioEditorComponent } from './scenario-editor.component';
 import { ScenarioEditorStore } from './scenario-editor.store';
-import { LoadSchemaEffect } from './effects';
+import { LoadSchemaEffect, ShowFormDataEffect } from './effects';
 
 @NgModule({
   imports: [
     SharedModule,
+    LtoFormsModule,
     MatExpansionModule,
     MatDividerModule,
     MatIconModule,
     MatButtonModule,
+    MatTabsModule,
+    MatCardModule,
     FormsModule,
     JsonEditorModule,
-    WaffleModule.forFeature('scenario-editor', [ScenarioEditorStore], [LoadSchemaEffect]),
+    FormDataModule,
+    WaffleModule.forFeature(
+      'scenario-editor',
+      [ScenarioEditorStore],
+      [LoadSchemaEffect, ShowFormDataEffect]
+    ),
     RouterModule.forChild([
       {
         path: '',

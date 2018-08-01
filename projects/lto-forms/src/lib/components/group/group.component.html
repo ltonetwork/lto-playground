@@ -1,0 +1,18 @@
+<span class="label">
+  <span>
+    {{definition.label}}
+  </span>
+  <mat-icon *ngIf="definition.helptext" [matTooltip]="definition.helptext">help_outline</mat-icon>
+</span>
+
+<!-- Several checkboxes -->
+<ng-container *ngIf="definition.multiselect">
+  <mat-checkbox *ngFor="let option of definition.options; index as i;" [value]="option.value" (change)="toggleCheckbox()">{{option.label}}</mat-checkbox>
+</ng-container>
+
+<!-- Radio group -->
+<ng-container *ngIf="definition.multiselect !== true">
+  <mat-radio-group [formControl]="control">
+    <mat-radio-button *ngFor="let option of definition.options; index as i;" [value]="option.value">{{ option.label }}</mat-radio-button>
+  </mat-radio-group>
+</ng-container>

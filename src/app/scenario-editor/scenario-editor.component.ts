@@ -4,13 +4,30 @@ import { Observable, Subscription, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Dispatcher } from '@waffle/core';
 import { IMonacoSchema } from './interfaces';
-import { UpdateScenario, LoadSchemas } from './actions';
+import { UpdateScenario, LoadSchemas, ShowFormData } from './actions';
 import { DummyScenario } from './dummy-scenario';
+import { trigger, query, stagger, animate, style, transition } from '@angular/animations';
 
 @Component({
   selector: 'lto-scenario-editor',
   templateUrl: './scenario-editor.component.html',
-  styleUrls: ['./scenario-editor.component.scss']
+  styleUrls: ['./scenario-editor.component.scss'],
+  animations: [
+    trigger('sectionAnimation', [
+      transition('void => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(50px)' }),
+          stagger(
+            100,
+            animate(
+              '0.25s cubic-bezier(0.0, 0.0, 0.2, 1)',
+              style({ opacity: 1, transform: 'translateY(0px)' })
+            )
+          )
+        ])
+      ])
+    ])
+  ]
 })
 export class ScenarioEditorComponent implements OnDestroy {
   schemas$: Observable<IMonacoSchema[] | null>;
@@ -47,5 +64,9 @@ export class ScenarioEditorComponent implements OnDestroy {
 
   trackByFn(index: number, item: any) {
     return item.key;
+  }
+
+  showFormData(data: any) {
+    this._dispatcher.dispatch(new ShowFormData({ data }));
   }
 }

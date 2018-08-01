@@ -3,7 +3,7 @@
 
 @include mat-core();
 
-$app-primary: mat-palette($mat-indigo);
+$app-primary: mat-palette($mat-blue);
 $app-accent: mat-palette($mat-amber);
 // $app-accent: mat-palette($mat-amber, A200, A100, A400);
 
@@ -14,3 +14,8 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
 
 @include components-theme($app-theme);
+
+.mat-button,
+.mat-dialog-container {
+  border-radius: 4px !important;
+}

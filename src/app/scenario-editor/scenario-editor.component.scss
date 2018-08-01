@@ -15,7 +15,7 @@
 
   pre {
     overflow: auto;
-    background: #f0f0f0;
+    background: #e0e0e0;
     border: 1px solid #ebebeb;
     border-radius: 8px;
     padding: 8px;
@@ -77,5 +77,32 @@ section {
   /deep/ .mat-expansion-panel {
     border: none !important;
     margin-bottom: 0;
+  }
+
+  .form-container {
+    padding: 32px;
+    box-sizing: border-box;
+    min-width: 500px;
+    background: #e0e0e0;
+    mat-card {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 8px;
+
+      button {
+        border-radius: 4px;
+      }
+    }
+    .form {
+      .title {
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      padding: 16px;
+      border: 1px solid #f0f0f0;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
   }
 }

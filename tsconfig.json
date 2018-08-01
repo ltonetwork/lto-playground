@@ -15,7 +15,10 @@
     "paths": {
       "@app": ["src/app"],
       "@app/*": ["src/app/*"],
-      "@waffle/core": ["projects/waffle/src"]
+      "@waffle/core": ["projects/waffle/src"],
+      "@lto/forms": ["projects/lto-forms/src"],
+      "lto-forms": ["dist/lto-forms"],
+      "lto-forms/*": ["dist/lto-forms/*"]
     }
   }
 }
