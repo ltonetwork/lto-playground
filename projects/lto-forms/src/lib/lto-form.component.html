@@ -1,1 +1,54 @@
-I am form
+<form novalidate [formGroup]="form">
+  <ng-container *ngFor="let step of schema.definition; index as i">
+    <!-- check step conditions -->
+    <lto-form-step *ngIf="getCondition$(step.conditions) | async" [name]="step.group | groupName:i" [form]="form" #group="ltoFormStep">
+      <h3>{{step.label}}</h3>
+      <ng-container *ngFor="let field of step.fields">
+        <!-- Check field condition -->
+        <ng-container *ngIf="getCondition$(field.conditions, step.group) | async">
+          <ng-container *ngTemplateOutlet="getTemplate(field); context: { definition: field, formGroup: group.control, step: step, value: valueFor(step.group, field.name), formData$: formData$}"></ng-container>
+        </ng-container>
+      </ng-container>
+    </lto-form-step>
+  </ng-container>
+</form>
+
+<ng-template #templateNotFoundTpl let-definition="definition">
+  <p>Template for "{{definition.$schema}}" not found</p>
+</ng-template>
+
+<ng-template #txtTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-text-input [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-text-input>
+</ng-template>
+
+<ng-template #selectTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-select [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-select>
+</ng-template>
+
+<ng-template #amountTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-amount [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-amount>
+</ng-template>
+
+<ng-template #moneyTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-money [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-money>
+</ng-template>
+
+<ng-template #dateTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-datepicker [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-datepicker>
+</ng-template>
+
+<ng-template #textareaTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-textarea [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-textarea>
+</ng-template>
+
+<ng-template #checkboxTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-checkbox [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-checkbox>
+</ng-template>
+
+<ng-template #groupTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-group [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-group>
+</ng-template>
+
+<ng-template #expressionTpl let-definition="definition" let-formGroup="formGroup" let-step="step" let-value="value" let-formData$="formData$">
+  <lto-expression [name]="definition.name | fieldName" [definition]="definition" [formGroup]="formGroup" [formValue]="formData$ | async"></lto-expression>
+</ng-template>

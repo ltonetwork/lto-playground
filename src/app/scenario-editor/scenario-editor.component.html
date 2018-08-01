@@ -61,7 +61,7 @@
                 <pre>{{item.value | json}}</pre>
               </mat-tab>
               <mat-tab label="Preview">
-                <lto-form></lto-form>
+                <lto-form [schema]="item.value"></lto-form>
               </mat-tab>
             </mat-tab-group>
           </ng-container>

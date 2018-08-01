@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   AmountModule,
   CheckboxModule,
@@ -13,11 +14,13 @@ import {
   TextInputModule,
   TextareaModule
 } from './components';
+import { FieldNamePipe, GroupNamePipe } from './pipes';
 import { LtoFormComponent } from './lto-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AmountModule,
     CheckboxModule,
     DatepickerModule,
@@ -30,7 +33,7 @@ import { LtoFormComponent } from './lto-form.component';
     TextInputModule,
     TextareaModule
   ],
-  declarations: [LtoFormComponent],
+  declarations: [LtoFormComponent, FieldNamePipe, GroupNamePipe],
   exports: [LtoFormComponent]
 })
 export class LtoFormsModule {}
