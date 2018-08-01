@@ -7,6 +7,10 @@
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">
     <ng-container *ngIf="scenario$ | async as scenario">
+      <ng-container *ngIf="scenario.definitions">
+        <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
+      </ng-container>
+
       <ng-container *ngIf="scenario.assets">
         <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Assets', items: scenario.assets}"></ng-container>
       </ng-container>
@@ -15,9 +19,6 @@
         <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', items: scenario.actors}"></ng-container>
       </ng-container>
 
-      <ng-container *ngIf="scenario.definitions">
-        <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
-      </ng-container>
     </ng-container>
   </div>
 </div>
@@ -54,7 +55,7 @@
           <span fxFlex="1 1 auto">{{item.value.title || item.key}}</span>
           <mat-icon>keyboard_arrow_down</mat-icon>
         </h2>
-        <mat-expansion-panel #pannel>
+        <mat-expansion-panel #pannel [expanded]="true">
           <ng-container *ngIf="item.value.$schema">
             <mat-tab-group>
               <mat-tab label="Preview">
