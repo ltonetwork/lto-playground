@@ -24,7 +24,7 @@
 </div>
 
 <ng-template #materialSection let-section="section" let-items="items">
-  <section class="material-section">
+  <section class="material-section" @sectionAnimation>
     <h1>{{section}}</h1>
     <p class="section-description">Section description to explain users what does it mean?</p>
     <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
@@ -46,7 +46,7 @@
 </ng-template>
 
 <ng-template #definitionTpl let-items="items">
-  <section class="material-section">
+  <section class="material-section" @sectionAnimation>
     <h1>Definitions</h1>
     <p class="section-description">Some explanation about definitions</p>
     <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
