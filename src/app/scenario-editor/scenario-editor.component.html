@@ -57,11 +57,27 @@
         <mat-expansion-panel #pannel>
           <ng-container *ngIf="item.value.$schema">
             <mat-tab-group>
+              <mat-tab label="Preview">
+                <div fxLayout="row" class="form-container" fxLayoutAlign="center">
+                  <!-- <div class="form">
+                    <h3 class="title">{{item.value.title}}</h3>
+                    <lto-form [schema]="item.value"></lto-form>
+                  </div> -->
+                  <mat-card>
+                    <mat-card-title>
+                      {{item.value.title}}
+                    </mat-card-title>
+                    <mat-card-content>
+                      <lto-form [schema]="item.value"></lto-form>
+                    </mat-card-content>
+                    <mat-card-actions fxLayout="row" fxLayoutAlign="end">
+                      <button mat-flat-button color="primary">Submit</button>
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+              </mat-tab>
               <mat-tab label="Code">
                 <pre>{{item.value | json}}</pre>
-              </mat-tab>
-              <mat-tab label="Preview">
-                <lto-form [schema]="item.value"></lto-form>
               </mat-tab>
             </mat-tab-group>
           </ng-container>

@@ -7,7 +7,7 @@ import { clean, interpolate } from './utils';
 @Component({
   selector: 'lto-form',
   templateUrl: './lto-form.component.html',
-  styles: []
+  styleUrls: ['./lto-form.component.scss']
 })
 export class LtoFormComponent implements OnInit {
   @Input() schema: any;

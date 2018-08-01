@@ -9,7 +9,8 @@ import {
   MatDividerModule,
   MatIconModule,
   MatButtonModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCardModule
 } from '@angular/material';
 
 import { JsonEditorModule } from './components';
@@ -27,6 +28,7 @@ import { LoadSchemaEffect } from './effects';
     MatIconModule,
     MatButtonModule,
     MatTabsModule,
+    MatCardModule,
     FormsModule,
     JsonEditorModule,
     WaffleModule.forFeature('scenario-editor', [ScenarioEditorStore], [LoadSchemaEffect]),
