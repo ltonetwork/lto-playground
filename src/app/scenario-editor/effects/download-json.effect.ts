@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect } from '@waffle/core';
 import { DownloadJSON } from '../actions';
 import { ScenarioEditorStore } from '../scenario-editor.store';
-import { take } from '../../../../node_modules/rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class DownloadJSONEffect {
