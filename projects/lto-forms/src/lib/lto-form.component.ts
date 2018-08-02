@@ -38,7 +38,7 @@ export class LtoFormComponent implements OnInit, OnDestroy {
       map(val => clean(val)),
       map((val: any) => {
         return Object.keys(val).reduce((formValue: any, key) => {
-          if (typeof val[key] === 'object' && val[key]) {
+          if (typeof val[key] === 'object' && !Array.isArray(val[key]) && val[key]) {
             // this is group and we have to clean up it
             const group = Object.keys(val[key]).reduce((groupValue, fieldName) => {
               if (val[key]) {
@@ -120,7 +120,7 @@ export class LtoFormComponent implements OnInit, OnDestroy {
         return this.textareaTpl;
       case 'checkbox':
         return this.checkboxTpl;
-      case 'group':
+      case 'select_group':
         return this.groupTpl;
       case 'expression':
         return this.expressionTpl;

@@ -16,7 +16,13 @@ export class GroupComponent extends BaseInput {
 
   control!: FormControl;
 
-  toggleCheckbox() {
-    console.log('Toggle');
+  toggleCheckbox(item: any, event: { checked: boolean }) {
+    const value: any[] = this.control.value || [];
+    if (event.checked) {
+      this.control.setValue([...value, item]);
+    } else {
+      const itemIndex = value.indexOf(item);
+      this.control.setValue([...value.slice(0, itemIndex), ...value.slice(itemIndex + 1)]);
+    }
   }
 }

@@ -7,7 +7,7 @@
 
 <!-- Several checkboxes -->
 <ng-container *ngIf="definition.multiselect">
-  <mat-checkbox *ngFor="let option of definition.options; index as i;" [value]="option.value" (change)="toggleCheckbox()">{{option.label}}</mat-checkbox>
+  <mat-checkbox *ngFor="let option of definition.options; index as i;" [value]="option.value" (change)="toggleCheckbox(option.value, $event)">{{option.label}}</mat-checkbox>
 </ng-container>
 
 <!-- Radio group -->

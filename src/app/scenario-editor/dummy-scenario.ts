@@ -614,11 +614,21 @@ export const DummyScenario = {
               required: true
             },
             {
-              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#date',
-              label: 'Date',
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#select_group',
+              label: 'SelectGroup',
               name: 'datePicker',
               required: true,
-              min: new Date('2018-08-02T08:50:06.195Z')
+              multiselect: true,
+              options: [
+                {
+                  value: 'foo',
+                  label: 'Foo'
+                },
+                {
+                  value: 'bar',
+                  label: 'Bar'
+                }
+              ]
             }
           ]
         }
