@@ -14,18 +14,8 @@ export class TextInputComponent extends BaseInput {
   @Input() value!: any;
   @Input() formValue!: any;
   get type(): 'text' | 'email' | 'password' | 'number' {
-    switch (this.definition.type) {
-      case 'Text':
-        return 'text';
-      case 'Email':
-        return 'email';
-      case 'Password':
-        return 'password';
-      case 'Number':
-        return 'number';
-      default:
-        return 'text';
-    }
+    const schemaType = this.definition.$schema.split('#').pop();
+    return schemaType;
   }
 
   control!: FormControl;
