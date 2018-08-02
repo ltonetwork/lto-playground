@@ -1,1 +1,4 @@
-<div>TODO: Add amount template</div>
+<mat-form-field>
+  <input [type]="number" matInput [placeholder]="definition.label" [formControl]="control" [required]="definition.required">
+</mat-form-field>
+<mat-icon *ngIf="definition.helptext" [matTooltip]="definition.helptext">help_outline</mat-icon>

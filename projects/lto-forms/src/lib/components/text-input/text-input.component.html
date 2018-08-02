@@ -1,4 +1,15 @@
-<mat-form-field>
-  <input [type]="type" matInput [placeholder]="definition.label" [formControl]="control">
-</mat-form-field>
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchCase="'number'">
+    <mat-form-field>
+      <input [type]="type" matInput [placeholder]="definition.label" [formControl]="control" [min]="minValue" [max]="maxValue"
+        [required]="definition.required">
+    </mat-form-field>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <mat-form-field>
+      <input [type]="type" matInput [placeholder]="definition.label" [formControl]="control" [required]="definition.required">
+    </mat-form-field>
+  </ng-container>
+</ng-container>
 <mat-icon *ngIf="definition.helptext" [matTooltip]="definition.helptext">help_outline</mat-icon>

@@ -5,7 +5,7 @@ import { BaseInput } from '../../base-input';
 @Component({
   selector: 'lto-amount',
   templateUrl: './amount.component.html',
-  styleUrls: ['./amount.component.css']
+  styleUrls: ['./amount.component.scss']
 })
 export class AmountComponent extends BaseInput {
   @Input() formGroup!: FormGroup;

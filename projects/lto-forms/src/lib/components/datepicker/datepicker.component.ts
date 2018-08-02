@@ -5,7 +5,7 @@ import { BaseInput } from '../../base-input';
 @Component({
   selector: 'lto-datepicker',
   templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.css']
+  styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent extends BaseInput {
   @Input() formGroup!: FormGroup;
@@ -15,4 +15,12 @@ export class DatepickerComponent extends BaseInput {
   @Input() formValue!: any;
 
   control!: FormControl;
+
+  get min(): Date | null {
+    return this.definition.min || null;
+  }
+
+  get max(): Date | null {
+    return this.definition.max || null;
+  }
 }

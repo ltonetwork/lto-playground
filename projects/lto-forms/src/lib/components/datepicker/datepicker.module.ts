@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatDatepickerModule, MatFormFieldModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatNativeDateModule
+} from '@angular/material';
 import { DatepickerComponent } from './datepicker.component';
 
 @NgModule({
@@ -10,7 +15,8 @@ import { DatepickerComponent } from './datepicker.component';
     ReactiveFormsModule,
     MatInputModule,
     MatDatepickerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   declarations: [DatepickerComponent],
   exports: [DatepickerComponent]

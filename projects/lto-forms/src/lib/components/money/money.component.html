@@ -1,5 +1,5 @@
 <mat-form-field>
   <span matPrefix>{{currency}} &nbsp;</span>
-  <input type="text" [placeholder]="definition.label" [formControl]="control" matInput>
+  <input type="number" [placeholder]="definition.label" [formControl]="control" matInput [required]="definition.required">
 </mat-form-field>
 <mat-icon *ngIf="definition.helptext" [matTooltip]="definition.helptext">help_outline</mat-icon>

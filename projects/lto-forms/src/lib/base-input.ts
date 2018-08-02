@@ -36,7 +36,7 @@ export abstract class BaseInput implements OnInit, OnDestroy {
     const validators: ValidatorFn[] = [];
     const asyncValidators: AsyncValidatorFn[] = [];
 
-    this.control = new FormControl(this.value);
+    this.control = new FormControl(this.value || this.definition.default);
     if (this.definition.validation) {
       asyncValidators.push((control: AbstractControl) => {
         return new Promise<any>(resolve => {
@@ -56,6 +56,14 @@ export abstract class BaseInput implements OnInit, OnDestroy {
 
     if (this.definition.required) {
       validators.push(Validators.required);
+    }
+
+    if (this.definition.min !== void 0) {
+      validators.push(Validators.min(this.definition.min));
+    }
+
+    if (this.definition.max !== void 0) {
+      validators.push(Validators.max(this.definition.max));
     }
 
     this.control.setValidators(validators);

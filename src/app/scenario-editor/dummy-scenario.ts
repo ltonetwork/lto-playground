@@ -604,6 +604,21 @@ export const DummyScenario = {
               label: 'E-mail',
               name: 'email',
               required: true
+            },
+            {
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#number',
+              label: 'Number',
+              name: 'num',
+              min: 10,
+              max: 100,
+              required: true
+            },
+            {
+              $schema: 'http://specs.legalthings.one/draft-01/form/schema.json#date',
+              label: 'Date',
+              name: 'datePicker',
+              required: true,
+              min: new Date('2018-08-02T08:50:06.195Z')
             }
           ]
         }

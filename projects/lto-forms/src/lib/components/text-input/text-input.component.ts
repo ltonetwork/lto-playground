@@ -18,5 +18,13 @@ export class TextInputComponent extends BaseInput {
     return schemaType;
   }
 
+  get minValue(): number {
+    return this.definition.min === void 0 ? Number.MIN_VALUE : this.definition.min;
+  }
+
+  get maxValue(): number {
+    return this.definition.max === void 0 ? Number.MAX_VALUE : this.definition.max;
+  }
+
   control!: FormControl;
 }
