@@ -17,16 +17,20 @@ import { trigger, query, stagger, animate, style, transition } from '@angular/an
   animations: [
     trigger('sectionAnimation', [
       transition('void => *', [
-        query(':enter', [
-          style({ opacity: 0, transform: 'translateY(50px)' }),
-          stagger(
-            100,
-            animate(
-              '0.25s cubic-bezier(0.0, 0.0, 0.2, 1)',
-              style({ opacity: 1, transform: 'translateY(0px)' })
+        query(
+          ':enter',
+          [
+            style({ opacity: 0, transform: 'translateY(50px)' }),
+            stagger(
+              100,
+              animate(
+                '0.25s cubic-bezier(0.0, 0.0, 0.2, 1)',
+                style({ opacity: 1, transform: 'translateY(0px)' })
+              )
             )
-          )
-        ])
+          ],
+          { optional: true }
+        )
       ])
     ])
   ]
