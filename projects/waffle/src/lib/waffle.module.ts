@@ -11,6 +11,10 @@ export function instancesProvider(...instances: any[]) {
   return instances;
 }
 
+export function SubjectFactory() {
+  return new Subject();
+}
+
 @NgModule({
   providers: [
     Manager,
@@ -49,11 +53,11 @@ export class WaffleModule {
         },
         {
           provide: ACTIONS$,
-          useValue: new Subject()
+          useFactory: SubjectFactory
         },
         {
           provide: ACTION_COMPLETE$,
-          useValue: new Subject()
+          useFactory: SubjectFactory
         },
         {
           provide: STORES,
