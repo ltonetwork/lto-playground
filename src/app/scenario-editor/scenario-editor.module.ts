@@ -13,7 +13,7 @@ import {
   MatCardModule
 } from '@angular/material';
 
-import { JsonEditorModule } from './components';
+import { JsonEditorModule, VisDiagramViewerModule } from './components';
 import { FormDataModule } from './modals';
 
 import { ScenarioEditorComponent } from './scenario-editor.component';
@@ -32,6 +32,7 @@ import { LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect } from './effe
     MatCardModule,
     FormsModule,
     JsonEditorModule,
+    VisDiagramViewerModule,
     FormDataModule,
     WaffleModule.forFeature(
       'scenario-editor',

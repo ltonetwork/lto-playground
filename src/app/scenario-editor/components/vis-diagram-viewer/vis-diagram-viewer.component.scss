@@ -1,0 +1,10 @@
+.container {
+  min-height: 1000px;
+}
+
+:host /deep/ .vis-network {
+  height: 1000px !important;
+  border: 1px solid #ebebeb;
+  overflow: hidden;
+  border-radius: 8px;
+}

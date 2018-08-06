@@ -26,6 +26,7 @@
     "core-js": "^2.5.4",
     "monaco-editor": "^0.13.1",
     "rxjs": "^6.0.0",
+    "vis": "^4.21.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
