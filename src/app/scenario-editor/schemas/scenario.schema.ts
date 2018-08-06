@@ -164,7 +164,7 @@ export const ScenarioSchema = {
             {
               type: 'array',
               items: {
-                $ref: '#/definitions/update'
+                $ref: '#/definitions/update_instruction'
               }
             }
           ]
@@ -243,11 +243,6 @@ export const ScenarioSchema = {
         }
       }
     },
-    update: {
-      $id: '#update',
-      description: 'TODO: Define this property',
-      type: 'object'
-    },
     transition: {
       $id: '#transition',
       description: 'Declaration of a state transition',
@@ -260,14 +255,14 @@ export const ScenarioSchema = {
         },
         response: {
           description: 'Action response',
-          type: 'string',
+          type: ['null', 'string'],
           pattern: '^\\w+$'
         },
         condition: {
           description: 'Condition that must be true',
           oneOf: [
             {
-              type: 'boolean'
+              type: ['null', 'boolean']
             },
             {
               $ref: '#/definitions/di'
