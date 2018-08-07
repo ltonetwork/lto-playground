@@ -2,5 +2,6 @@
   <a class="brand" routerLink="/">Playground</a>
   <mat-icon *ngIf="markers.length" [@showAnimation] color="error" matTooltip="You have errors in JSON">error_outline</mat-icon>
   <span fxFlex="1 1 auto"></span>
+  <button mat-button (click)="importClick()">Import</button>
   <button mat-button (click)="exportClick()">Export</button>
 </mat-toolbar>

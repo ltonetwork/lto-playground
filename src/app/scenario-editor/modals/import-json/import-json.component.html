@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Import JSON</h1>
+<div mat-dialog-content>
+  <input type="file" placeholder="Clearable input" accept=".json" #input>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  <button mat-button mat-dialog-close (click)="import()" color="primary">Import</button>
+</div>

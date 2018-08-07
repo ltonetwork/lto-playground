@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppStateStore } from './app.store';
 import { Dispatcher } from '@waffle/core';
-import { DownloadJSON } from './scenario-editor/actions';
+import { DownloadJSON, ImportJSON } from './scenario-editor/actions';
 
 @Component({
   selector: 'lto-root',
@@ -15,5 +15,9 @@ export class AppComponent {
 
   export() {
     this._dispatcher.dispatch(new DownloadJSON());
+  }
+
+  import() {
+    this._dispatcher.dispatch(new ImportJSON());
   }
 }

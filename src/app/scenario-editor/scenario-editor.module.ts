@@ -12,7 +12,7 @@ import {
 } from '@angular/material';
 
 import { JsonEditorModule, VisDiagramViewerModule, D3DiagramViwerModule } from './components';
-import { FormDataModule } from './modals';
+import { FormDataModule, ImportJsonModule } from './modals';
 
 import { ScenarioEditorComponent } from './scenario-editor.component';
 
@@ -30,7 +30,8 @@ import { ScenarioEditorComponent } from './scenario-editor.component';
     JsonEditorModule,
     VisDiagramViewerModule,
     D3DiagramViwerModule,
-    FormDataModule
+    FormDataModule,
+    ImportJsonModule
   ],
   declarations: [ScenarioEditorComponent]
 })

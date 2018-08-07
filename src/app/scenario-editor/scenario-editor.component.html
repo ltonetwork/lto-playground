@@ -6,12 +6,14 @@
     </ng-container>
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">
-    <section class="material-section">
-      <h1>State diagram</h1>
-      <!-- <lto-vis-diagram-viewer [scenario]="scenario$ | async"></lto-vis-diagram-viewer> -->
-      <lto-d3-diagram-viwer [scenario]="scenario$ | async"></lto-d3-diagram-viwer>
+    <ng-container *ngIf="scenario$ | async as scenario">
+      <section class="material-section" *ngIf="scenario.states">
+        <h1>State diagram</h1>
+        <lto-d3-diagram-viwer [scenario]="scenario"></lto-d3-diagram-viwer>
 
-    </section>
+      </section>
+    </ng-container>
+
 
     <ng-container *ngIf="scenario$ | async as scenario">
       <ng-container *ngIf="scenario.definitions">

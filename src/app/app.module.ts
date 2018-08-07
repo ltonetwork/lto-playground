@@ -17,7 +17,8 @@ import { ScenarioEditorModule } from './scenario-editor/scenario-editor.module';
 import {
   LoadSchemaEffect,
   ShowFormDataEffect,
-  DownloadJSONEffect
+  DownloadJSONEffect,
+  ImportJSONEffect
 } from './scenario-editor/effects';
 import { ScenarioEditorStore } from './scenario-editor/scenario-editor.store';
 
@@ -29,7 +30,7 @@ import { ScenarioEditorStore } from './scenario-editor/scenario-editor.store';
     HttpClientModule,
     WaffleModule.forRoot(
       [AppStateStore, ScenarioEditorStore],
-      [LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect]
+      [LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect, ImportJSONEffect]
     ),
     SharedModule,
     ScenarioEditorModule,
