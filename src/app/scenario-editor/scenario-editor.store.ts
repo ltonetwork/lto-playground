@@ -17,7 +17,7 @@ export class ScenarioEditorStore extends Store<IScenarioEditorState> {
 
   constructor() {
     super('ScenarioEditorStore', {
-      scenario: {},
+      scenario: null,
       schemas: null
     });
 

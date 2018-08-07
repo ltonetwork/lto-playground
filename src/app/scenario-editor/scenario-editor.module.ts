@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
-import { WaffleModule } from '@waffle/core';
 import { LtoFormsModule } from '@lto/forms';
 import {
   MatExpansionModule,
@@ -17,8 +15,6 @@ import { JsonEditorModule, VisDiagramViewerModule, D3DiagramViwerModule } from '
 import { FormDataModule } from './modals';
 
 import { ScenarioEditorComponent } from './scenario-editor.component';
-import { ScenarioEditorStore } from './scenario-editor.store';
-import { LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect } from './effects';
 
 @NgModule({
   imports: [
@@ -34,18 +30,7 @@ import { LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect } from './effe
     JsonEditorModule,
     VisDiagramViewerModule,
     D3DiagramViwerModule,
-    FormDataModule,
-    WaffleModule.forFeature(
-      'scenario-editor',
-      [ScenarioEditorStore],
-      [LoadSchemaEffect, ShowFormDataEffect, DownloadJSONEffect]
-    ),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: ScenarioEditorComponent
-      }
-    ])
+    FormDataModule
   ],
   declarations: [ScenarioEditorComponent]
 })

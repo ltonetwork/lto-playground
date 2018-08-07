@@ -6,6 +6,12 @@
     </ng-container>
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">
+    <section class="material-section">
+      <h1>State diagram</h1>
+      <!-- <lto-vis-diagram-viewer [scenario]="scenario$ | async"></lto-vis-diagram-viewer> -->
+      <lto-d3-diagram-viwer [scenario]="scenario$ | async"></lto-d3-diagram-viwer>
+
+    </section>
 
     <ng-container *ngIf="scenario$ | async as scenario">
       <ng-container *ngIf="scenario.definitions">
@@ -19,13 +25,6 @@
       <ng-container *ngIf="scenario.assets">
         <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', description: 'An actor is an identity or a group of identities that participate on a process. The actors are predefined in a scenario and instantiated for the process.', items: scenario.actors}"></ng-container>
       </ng-container>
-
-      <section class="material-section">
-        <h1>State diagram</h1>
-        <!-- <lto-vis-diagram-viewer [scenario]="scenario$ | async"></lto-vis-diagram-viewer> -->
-        <lto-d3-diagram-viwer [scenario]="scenario$ | async"></lto-d3-diagram-viwer>
-
-      </section>
 
     </ng-container>
   </div>
