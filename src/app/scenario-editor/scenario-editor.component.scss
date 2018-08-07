@@ -34,6 +34,20 @@ section {
   margin-bottom: 32px;
 }
 
+.diagram-section {
+  margin-bottom: 0 !important;
+  height: 90%;
+  overflow: hidden;
+  padding: 16px;
+
+  lto-d3-diagram-viwer {
+    height: 100%;
+  }
+}
+.data-tab {
+  padding-top: 32px;
+}
+
 :host /deep/ .mat-expansion-panel {
   box-shadow: none !important;
   border: 1px solid #e0e0e0;
@@ -42,6 +56,16 @@ section {
 
   .mat-expansion-panel-header-title {
     font-size: 20px;
+  }
+}
+
+mat-tab-group {
+  min-height: 100% !important;
+}
+
+:host /deep/ {
+  .mat-tab-body-wrapper {
+    flex: 1 1 auto;
   }
 }
 

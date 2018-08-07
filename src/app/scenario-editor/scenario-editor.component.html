@@ -6,29 +6,37 @@
     </ng-container>
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">
-    <ng-container *ngIf="scenario$ | async as scenario">
-      <section class="material-section" *ngIf="scenario.states">
-        <h1>State diagram</h1>
-        <lto-d3-diagram-viwer [scenario]="scenario"></lto-d3-diagram-viwer>
+    <mat-tab-group>
+      <mat-tab label="State diagram">
+        <ng-template matTabContent>
+          <ng-container *ngIf="scenario$ | async as scenario">
+            <section class="material-section diagram-section" *ngIf="scenario.states">
+              <lto-d3-diagram-viwer [scenario]="scenario"></lto-d3-diagram-viwer>
+            </section>
+          </ng-container>
+        </ng-template>
+      </mat-tab>
 
-      </section>
-    </ng-container>
+      <mat-tab label="Data">
+        <div class="data-tab">
+          <ng-container *ngIf="scenario$ | async as scenario">
+            <ng-container *ngIf="scenario.definitions">
+              <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
+            </ng-container>
 
+            <ng-container *ngIf="scenario.assets">
+              <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Assets', description: 'Object with JSON schema, defining the properties for each asset. The keys of the object is used to reference the asset. The asset schema must define an object.', items: scenario.assets}"></ng-container>
+            </ng-container>
 
-    <ng-container *ngIf="scenario$ | async as scenario">
-      <ng-container *ngIf="scenario.definitions">
-        <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
-      </ng-container>
+            <ng-container *ngIf="scenario.assets">
+              <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', description: 'An actor is an identity or a group of identities that participate on a process. The actors are predefined in a scenario and instantiated for the process.', items: scenario.actors}"></ng-container>
+            </ng-container>
 
-      <ng-container *ngIf="scenario.assets">
-        <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Assets', description: 'Object with JSON schema, defining the properties for each asset. The keys of the object is used to reference the asset. The asset schema must define an object.', items: scenario.assets}"></ng-container>
-      </ng-container>
+          </ng-container>
+        </div>
 
-      <ng-container *ngIf="scenario.assets">
-        <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', description: 'An actor is an identity or a group of identities that participate on a process. The actors are predefined in a scenario and instantiated for the process.', items: scenario.actors}"></ng-container>
-      </ng-container>
-
-    </ng-container>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
 
