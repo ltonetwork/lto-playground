@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --aot --prod --build-optimizer --vendor-chunk=false --output-hashing=none",
+    "build": "npm run build:app && npm run build:bundle && cat ./src/dist-index.html > ./dist/lto-playground/index.html",
+    "build:app": "ng build --aot --prod --build-optimizer --vendor-chunk=false --output-hashing=none",
+    "build:bundle": "cd ./dist/lto-playground/ && cat runtime.js >> bundle.js && cat polyfills.js >> bundle.js && cat scripts.js >> bundle.js && cat main.js >> bundle.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
