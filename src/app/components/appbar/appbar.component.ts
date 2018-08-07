@@ -21,6 +21,7 @@ import { trigger, animate, style, transition } from '@angular/animations';
 export class AppbarComponent implements OnInit {
   @Input() markers!: any[];
   @Output() export = new EventEmitter();
+  @Output() import = new EventEmitter();
 
   constructor() {}
 
@@ -28,5 +29,9 @@ export class AppbarComponent implements OnInit {
 
   exportClick() {
     this.export.next();
+  }
+
+  importClick() {
+    this.import.next();
   }
 }

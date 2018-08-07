@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  width: 400px;
+}
+
+input {
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  padding: 8px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+[mat-dialog-content] {
+  padding: 32px 24px !important;
+}

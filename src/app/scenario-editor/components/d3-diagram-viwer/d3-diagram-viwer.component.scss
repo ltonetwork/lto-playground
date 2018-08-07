@@ -1,4 +1,7 @@
 :host /deep/ {
+  display: block;
+  position: relative;
+
   .node rect {
     stroke: #333;
     fill: #fff;
@@ -9,4 +12,12 @@
     fill: #333;
     stroke-width: 1.5px;
   }
+}
+
+.error {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: red;
 }

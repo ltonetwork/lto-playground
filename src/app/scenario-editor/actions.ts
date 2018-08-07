@@ -20,3 +20,7 @@ export class ShowFormData {
 export class DownloadJSON {
   static readonly type = 'DownloadJSON';
 }
+
+export class ImportJSON {
+  static readonly type = 'ImportJSON';
+}
