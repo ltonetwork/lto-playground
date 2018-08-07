@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ScenarioEditorComponent } from './scenario-editor/scenario-editor.component';
+
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: './scenario-editor/scenario-editor.module#ScenarioEditorModule'
+    component: ScenarioEditorComponent
   }
 ];
 

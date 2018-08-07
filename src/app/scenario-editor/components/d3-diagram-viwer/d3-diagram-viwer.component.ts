@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
 
 declare var dagreD3: any;
 declare var d3: any;
@@ -8,32 +8,22 @@ declare var d3: any;
   templateUrl: './d3-diagram-viwer.component.html',
   styleUrls: ['./d3-diagram-viwer.component.scss']
 })
-export class D3DiagramViwerComponent implements OnInit {
+export class D3DiagramViwerComponent implements OnInit, OnChanges {
   @ViewChild('svg') svgRef!: ElementRef<SVGElement>;
   @Input() scenario!: any;
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnChanges() {
+    if (!this.scenario) {
+      return;
+    }
     // Create a new directed graph
     const g = new dagreD3.graphlib.Graph().setGraph({});
     const width = 960;
     const height = 600;
-
-    // States and transitions from RFC 793
-    var states = [
-      'CLOSED',
-      'LISTEN',
-      'SYN RCVD',
-      'SYN SENT',
-      'ESTAB',
-      'FINWAIT-1',
-      'CLOSE WAIT',
-      'FINWAIT-2',
-      'CLOSING',
-      'LAST-ACK',
-      'TIME WAIT'
-    ];
 
     Object.keys(this.scenario.states).forEach(stateName => {
       g.setNode(stateName, { label: stateName });
