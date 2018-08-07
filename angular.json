@@ -34,7 +34,14 @@
             "styles": ["src/styles.scss"],
             "scripts": [
               "./node_modules/vis/dist/vis.min.js",
-              "./node_modules/vis/dist/vis-network.min.js"
+              "./node_modules/vis/dist/vis-network.min.js",
+              "./node_modules/d3/dist/d3.min.js",
+              "./node_modules/d3-zoom/build/d3-zoom.min.js",
+              "./node_modules/d3-scale/dist/d3-scale.min.js",
+              "./node_modules/lodash/lodash.min.js",
+              "./node_modules/graphlib/dist/graphlib.core.js",
+              "./node_modules/dagre/dist/dagre.core.js",
+              "./node_modules/dagre-d3/dist/dagre-d3.core.js"
             ]
           },
           "configurations": {
