@@ -68,6 +68,7 @@ export class D3DiagramViwerComponent implements OnInit, OnChanges {
 
     this._svg
       .attr('width', '100%')
+      .attr('height', '100%')
       .attr('viewBox', '0 0 ' + Math.min(width, height) + ' ' + Math.min(width, height))
       .attr('preserveAspectRatio', 'xMinYMin');
 
