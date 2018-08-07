@@ -7,7 +7,7 @@ import { IMonacoSchema } from './interfaces';
 import { UpdateScenario, LoadSchemas, ShowFormData } from './actions';
 import { UpdateEditorMarkers } from '@app/actions';
 // import { DummyScenario } from './dummy-scenario';
-import { Dummy2 } from './dummy-scenarios';
+import { Dummy2, Dummy1 } from './dummy-scenarios';
 import { trigger, query, stagger, animate, style, transition } from '@angular/animations';
 
 @Component({
@@ -51,7 +51,7 @@ export class ScenarioEditorComponent implements OnDestroy {
       .subscribe(scenario => this.updateScenario(scenario));
 
     // Set dummy scenario
-    _dispatcher.dispatch([new UpdateScenario({ scenario: Dummy2 }), new LoadSchemas()]);
+    _dispatcher.dispatch([new UpdateScenario({ scenario: Dummy1 }), new LoadSchemas()]);
   }
 
   ngOnDestroy() {

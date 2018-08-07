@@ -35,30 +35,17 @@ export class D3DiagramViwerComponent implements OnInit {
       'TIME WAIT'
     ];
 
-    // Automatically label each of the nodes
-    states.forEach(state => {
-      g.setNode(state, { label: state });
+    Object.keys(this.scenario.states).forEach(stateName => {
+      g.setNode(stateName, { label: stateName });
     });
 
-    // Set up the edges
-    g.setEdge('CLOSED', 'LISTEN', { label: 'open' });
-    g.setEdge('LISTEN', 'SYN RCVD', { label: 'rcv SYN' });
-    g.setEdge('LISTEN', 'SYN SENT', { label: 'send' });
-    g.setEdge('LISTEN', 'CLOSED', { label: 'close' });
-    g.setEdge('SYN RCVD', 'FINWAIT-1', { label: 'close' });
-    g.setEdge('SYN RCVD', 'ESTAB', { label: 'rcv ACK of SYN' });
-    g.setEdge('SYN SENT', 'SYN RCVD', { label: 'rcv SYN' });
-    g.setEdge('SYN SENT', 'ESTAB', { label: 'rcv SYN, ACK' });
-    g.setEdge('SYN SENT', 'CLOSED', { label: 'close' });
-    g.setEdge('ESTAB', 'FINWAIT-1', { label: 'close' });
-    g.setEdge('ESTAB', 'CLOSE WAIT', { label: 'rcv FIN' });
-    g.setEdge('FINWAIT-1', 'FINWAIT-2', { label: 'rcv ACK of FIN' });
-    g.setEdge('FINWAIT-1', 'CLOSING', { label: 'rcv FIN' });
-    g.setEdge('CLOSE WAIT', 'LAST-ACK', { label: 'close' });
-    g.setEdge('FINWAIT-2', 'TIME WAIT', { label: 'rcv FIN' });
-    g.setEdge('CLOSING', 'TIME WAIT', { label: 'rcv ACK of FIN' });
-    g.setEdge('LAST-ACK', 'CLOSED', { label: 'rcv ACK of FIN' });
-    g.setEdge('TIME WAIT', 'CLOSED', { label: 'timeout=2MSL' });
+    Object.keys(this.scenario.states).forEach(stateName => {
+      // Go trough transitions and build edges
+      const transitions: any[] = this.scenario.states[stateName].transitions;
+      transitions.forEach(transition => {
+        g.setEdge(stateName, transition.transition, { label: transition.action });
+      });
+    });
 
     // Set some general styles
     g.nodes().forEach((v: any) => {
@@ -67,8 +54,9 @@ export class D3DiagramViwerComponent implements OnInit {
     });
 
     // Add some custom colors based on state
-    g.node('CLOSED').style = 'fill: #f77';
-    g.node('ESTAB').style = 'fill: #7f7';
+    g.node(':initial').style = 'fill: #7f7';
+    g.node(':failed').style = 'fill: #f77';
+    g.node(':success').style = 'fill: #7f7';
 
     var svg = d3.select(this.svgRef.nativeElement),
       inner = svg.select('g');
@@ -91,10 +79,8 @@ export class D3DiagramViwerComponent implements OnInit {
     render(inner, g);
 
     // Center the graph
-    var initialScale = 0.75;
+    var initialScale = 1;
     zoom.scaleExtent([0.1, 8]);
-    // zoom.translateBy(svg, (svg.attr('width') - g.graph().width * initialScale) / 2, 0);
     zoom.scaleTo(svg, initialScale);
-    svg.attr('height', g.graph().height * initialScale + 40);
   }
 }
