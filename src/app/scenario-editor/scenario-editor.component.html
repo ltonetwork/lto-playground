@@ -6,6 +6,7 @@
     </ng-container>
   </div>
   <div class="documentation-panel" fxFlex="1 1 50">
+
     <ng-container *ngIf="scenario$ | async as scenario">
       <ng-container *ngIf="scenario.definitions">
         <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
@@ -18,6 +19,13 @@
       <ng-container *ngIf="scenario.assets">
         <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', description: 'An actor is an identity or a group of identities that participate on a process. The actors are predefined in a scenario and instantiated for the process.', items: scenario.actors}"></ng-container>
       </ng-container>
+
+      <section class="material-section">
+        <h1>State diagram</h1>
+        <!-- <lto-vis-diagram-viewer [scenario]="scenario$ | async"></lto-vis-diagram-viewer> -->
+        <lto-d3-diagram-viwer [scenario]="scenario$ | async"></lto-d3-diagram-viwer>
+
+      </section>
 
     </ng-container>
   </div>
@@ -48,8 +56,9 @@
 <ng-template #definitionTpl let-items="items">
   <section class="material-section" @sectionAnimation>
     <h1>Definitions</h1>
-    <p class="section-description">An object with constant values and predefined objects. This can be used to define things needed in multiple actions and/or states.<br/>
-      Even if it's only used in a single action or state, using definitions helps to keep actions and states small and readable</p>
+    <p class="section-description">An object with constant values and predefined objects. This can be used to define things needed in multiple actions and/or
+      states.
+      <br/> Even if it's only used in a single action or state, using definitions helps to keep actions and states small and readable</p>
     <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
       <div class="content">
         <h2 fxLayout="row" fxLayoutAlign="start center" (click)="pannel.toggle()">
