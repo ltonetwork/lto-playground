@@ -4,9 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build:app && npm run build:bundle && cat ./src/dist-index.html > ./dist/lto-playground/index.html",
+    "build": "npm run build:app && npm run build:bundle && npm run build:clean && npm run build:assets && cat ./src/dist-index.html > ./dist/lto-playground/index.html",
     "build:app": "ng build --aot --prod --build-optimizer --vendor-chunk=false --output-hashing=none",
     "build:bundle": "cd ./dist/lto-playground/ && cat runtime.js >> bundle.js && cat polyfills.js >> bundle.js && cat scripts.js >> bundle.js && cat main.js >> bundle.js",
+    "build:clean": "cd ./dist/lto-playground/ && rm -f runtime.js && rm -f polyfills.js && rm -f scripts.js && rm -f main.js",
+    "build:assets": "cp -rf ./src/assets ./dist/lto-playground/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
