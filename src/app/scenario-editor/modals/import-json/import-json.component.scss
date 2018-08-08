@@ -16,6 +16,10 @@ input {
   box-sizing: border-box;
 }
 
+.art-spacing {
+  padding-bottom: 24px;
+}
+
 ::ng-deep {
   .mat-form-field-infix {
     width:100%;
