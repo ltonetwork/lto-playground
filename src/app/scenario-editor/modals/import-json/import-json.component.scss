@@ -1,6 +1,10 @@
 :host {
-  display: block;
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 500px;
+  max-width: 500px;
+  min-height: 500px;
 }
 
 input {
@@ -11,6 +15,9 @@ input {
   width: 100%;
   box-sizing: border-box;
 }
-[mat-dialog-content] {
-  padding: 32px 24px !important;
+
+::ng-deep {
+  .mat-form-field-infix {
+    width:100%;
+  }
 }
