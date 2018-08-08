@@ -5,7 +5,9 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
-  MatIconModule
+  MatIconModule,
+  MatSelectModule,
+  MatTabsModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +22,9 @@ import { ImportJsonComponent } from './import-json.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
+    MatTabsModule
   ],
   declarations: [ImportJsonComponent],
   entryComponents: [ImportJsonComponent]

@@ -1,5 +1,8 @@
 <mat-toolbar color="primary" class="mat-elevation-z4" fxLayout="row" fxLayoutAlign="start center">
-  <a class="brand" routerLink="/">Playground</a>
+  <div fxFlex="0 1 auto" fxLayout="center center" routerLink="/">
+    <img class="logo" src="assets/logo.png" alt="LegalThings One">
+    <a class="brand">Playground</a>
+  </div>
   <mat-icon *ngIf="markers.length" [@showAnimation] color="error" matTooltip="You have errors in JSON">error_outline</mat-icon>
   <span fxFlex="1 1 auto"></span>
   <button mat-button (click)="importClick()">Import</button>
