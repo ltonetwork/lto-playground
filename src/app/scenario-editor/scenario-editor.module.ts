@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 import { LtoFormsModule } from '@lto/forms';
+import { NgxsModule } from '@ngxs/store';
+import { ScenarioEditorState } from './scenario-editor.state';
 import {
   MatExpansionModule,
   MatDividerModule,
@@ -19,6 +21,7 @@ import { ScenarioEditorComponent } from './scenario-editor.component';
 @NgModule({
   imports: [
     SharedModule,
+    NgxsModule.forFeature([ScenarioEditorState]),
     LtoFormsModule,
     MatExpansionModule,
     MatDividerModule,

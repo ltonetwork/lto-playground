@@ -1,14 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ScenarioEditorStore } from './scenario-editor.store';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Dispatcher } from '@waffle/core';
+import { Select, Store } from '@ngxs/store';
+
 import { IMonacoSchema } from './interfaces';
 import { UpdateScenario, LoadSchemas, ShowFormData } from './actions';
 import { UpdateEditorMarkers } from '@app/actions';
 // import { DummyScenario } from './dummy-scenario';
 import { Dummy2, Dummy1 } from './dummy-scenarios';
 import { trigger, query, stagger, animate, style, transition } from '@angular/animations';
+import { ScenarioEditorState } from './scenario-editor.state';
 
 @Component({
   selector: 'lto-scenario-editor',
@@ -36,22 +37,21 @@ import { trigger, query, stagger, animate, style, transition } from '@angular/an
   ]
 })
 export class ScenarioEditorComponent implements OnDestroy {
-  schemas$: Observable<IMonacoSchema[] | null>;
+  @Select(ScenarioEditorState.schemas)
+  schemas$!: Observable<IMonacoSchema[] | null>;
+  @Select(ScenarioEditorState.scenario)
+  scenario$!: Observable<any>;
 
-  scenario$: Observable<any>;
   private _scenarioChanges$: Subject<any> = new Subject();
   private _editorSubscription?: Subscription;
 
-  constructor(_store: ScenarioEditorStore, private _dispatcher: Dispatcher) {
-    this.schemas$ = _store.schema$;
-    this.scenario$ = _store.scenario$;
-
+  constructor(private _store: Store) {
     this._editorSubscription = this._scenarioChanges$
       .pipe(debounceTime(300))
       .subscribe(scenario => this.updateScenario(scenario));
 
     // Set dummy scenario
-    _dispatcher.dispatch([new UpdateScenario({ scenario: Dummy1 }), new LoadSchemas()]);
+    _store.dispatch([new UpdateScenario({ scenario: Dummy1 }), new LoadSchemas()]);
   }
 
   ngOnDestroy() {
@@ -65,7 +65,7 @@ export class ScenarioEditorComponent implements OnDestroy {
   }
 
   updateScenario(scenario: any) {
-    this._dispatcher.dispatch(new UpdateScenario({ scenario }));
+    this._store.dispatch(new UpdateScenario({ scenario }));
   }
 
   trackByFn(index: number, item: any) {
@@ -73,10 +73,10 @@ export class ScenarioEditorComponent implements OnDestroy {
   }
 
   showFormData(data: any) {
-    this._dispatcher.dispatch(new ShowFormData({ data }));
+    this._store.dispatch(new ShowFormData({ data }));
   }
 
   updateEditrMarkers(markers: any[]) {
-    this._dispatcher.dispatch(new UpdateEditorMarkers({ markers }));
+    this._store.dispatch(new UpdateEditorMarkers({ markers }));
   }
 }
