@@ -87,6 +87,9 @@ mat-tab-group {
       font-size: 32px;
     }
   }
+  mat-expansion-panel mat-tab-group pre {
+    border-radius: 0;
+  }
 
   p.section-description {
     color: #5f6368;
@@ -125,7 +128,7 @@ mat-tab-group {
   .form-container {
     padding: 32px;
     box-sizing: border-box;
-    min-width: 500px;
+    // min-width: 500px;
     background: #e0e0e0;
     mat-card {
       width: 100%;
