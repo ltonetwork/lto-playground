@@ -13,7 +13,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #appMenu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="showScenario()">
       <mat-icon>code</mat-icon>
       Show JSON
     </button>
