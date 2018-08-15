@@ -47,7 +47,13 @@ export class ScenarioEditorState {
 
   @Action(SetSchemas)
   setSchemas(ctx: StateContext<IScenarioEditorState>, action: SetSchemas) {
-    ctx.patchState({ schemas: action.payload.schemas });
+    const fileMatch = ['*.json'];
+    const schemas = action.payload.schemas.map(schema => ({
+      uri: schema['$id'],
+      fileMatch,
+      schema
+    }));
+    ctx.patchState({ schemas });
   }
 
   @Action(LoadSchemas)
