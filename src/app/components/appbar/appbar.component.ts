@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, animate, style, transition } from '@angular/animations';
+import { Store } from '@ngxs/store';
+import { ShowFormData } from '../../scenario-editor/actions';
+import { ScenarioEditorState } from '../../scenario-editor/scenario-editor.state';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'lto-appbar',
@@ -19,11 +23,14 @@ import { trigger, animate, style, transition } from '@angular/animations';
   ]
 })
 export class AppbarComponent implements OnInit {
-  @Input() markers!: any[];
-  @Output() export = new EventEmitter();
-  @Output() import = new EventEmitter();
+  @Input()
+  markers!: any[];
+  @Output()
+  export = new EventEmitter();
+  @Output()
+  import = new EventEmitter();
 
-  constructor() {}
+  constructor(private _store: Store) {}
 
   ngOnInit() {}
 
@@ -33,5 +40,10 @@ export class AppbarComponent implements OnInit {
 
   importClick() {
     this.import.next();
+  }
+
+  async showScenario() {
+    const scenario = await this._store.selectOnce(ScenarioEditorState.scenario).toPromise();
+    this._store.dispatch(new ShowFormData({ data: scenario }));
   }
 }

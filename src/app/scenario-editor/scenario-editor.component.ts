@@ -8,39 +8,20 @@ import { UpdateScenario, LoadSchemas, ShowFormData } from './actions';
 import { UpdateEditorMarkers } from '@app/actions';
 // import { DummyScenario } from './dummy-scenario';
 import { Dummy2, Dummy1 } from './dummy-scenarios';
-import { trigger, query, stagger, animate, style, transition } from '@angular/animations';
 import { ScenarioEditorState } from './scenario-editor.state';
 
 @Component({
   selector: 'lto-scenario-editor',
   templateUrl: './scenario-editor.component.html',
-  styleUrls: ['./scenario-editor.component.scss'],
-  animations: [
-    trigger('sectionAnimation', [
-      transition('void => *', [
-        query(
-          ':enter',
-          [
-            style({ opacity: 0, transform: 'translateY(50px)' }),
-            stagger(
-              100,
-              animate(
-                '0.25s cubic-bezier(0.0, 0.0, 0.2, 1)',
-                style({ opacity: 1, transform: 'translateY(0px)' })
-              )
-            )
-          ],
-          { optional: true }
-        )
-      ])
-    ])
-  ]
+  styleUrls: ['./scenario-editor.component.scss']
 })
 export class ScenarioEditorComponent implements OnDestroy {
   @Select(ScenarioEditorState.schemas)
   schemas$!: Observable<IMonacoSchema[] | null>;
   @Select(ScenarioEditorState.scenario)
   scenario$!: Observable<any>;
+
+  showTabContent = true;
 
   private _scenarioChanges$: Subject<any> = new Subject();
   private _editorSubscription?: Subscription;
@@ -78,5 +59,10 @@ export class ScenarioEditorComponent implements OnDestroy {
 
   updateEditrMarkers(markers: any[]) {
     this._store.dispatch(new UpdateEditorMarkers({ markers }));
+  }
+
+  reloadTabs() {
+    this.showTabContent = false;
+    setTimeout(() => (this.showTabContent = true), 100);
   }
 }

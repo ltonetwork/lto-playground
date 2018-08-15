@@ -1,12 +1,12 @@
 <div class="scenario-editor-content" fxLayout="row">
-  <div class="editor-panel" fxFlex="1 1 50">
+  <div class="editor-panel" fxFlex="1 1 50" fxHide fxShow.gt-sm>
     <div class="editor-header">scenario_namme</div>
     <ng-container *ngIf="schemas$ | async as schemas">
       <lto-json-editor [schemas]="schemas" [value]="scenario$ | async" #editor (changeScenario)="scenarioChanged($event)" (markers)="updateEditrMarkers($event)"></lto-json-editor>
     </ng-container>
   </div>
-  <div class="documentation-panel" fxFlex="1 1 50">
-    <mat-tab-group>
+  <div class="documentation-panel" fxFlex="1 1 auto">
+    <mat-tab-group (selectedTabChange)="reloadTabs()">
       <mat-tab label="State diagram">
         <ng-template matTabContent>
           <ng-container *ngIf="scenario$ | async as scenario">
@@ -20,16 +20,16 @@
       <mat-tab label="Data">
         <div class="data-tab">
           <ng-container *ngIf="scenario$ | async as scenario">
-            <ng-container *ngIf="scenario.definitions">
-              <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
+            <ng-container *ngIf="scenario.assets">
+              <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', description: 'An actor is an identity or a group of identities that participate on a process. The actors are predefined in a scenario and instantiated for the process.', items: scenario.actors}"></ng-container>
             </ng-container>
 
             <ng-container *ngIf="scenario.assets">
               <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Assets', description: 'Object with JSON schema, defining the properties for each asset. The keys of the object is used to reference the asset. The asset schema must define an object.', items: scenario.assets}"></ng-container>
             </ng-container>
 
-            <ng-container *ngIf="scenario.assets">
-              <ng-container *ngTemplateOutlet="materialSection; context: { section: 'Actors', description: 'An actor is an identity or a group of identities that participate on a process. The actors are predefined in a scenario and instantiated for the process.', items: scenario.actors}"></ng-container>
+            <ng-container *ngIf="scenario.definitions">
+              <ng-container *ngTemplateOutlet="definitionTpl; context: { section: 'Definitions', items: scenario.definitions}"></ng-container>
             </ng-container>
 
           </ng-container>
@@ -41,7 +41,7 @@
 </div>
 
 <ng-template #materialSection let-section="section" let-description="description" let-items="items">
-  <section class="material-section" @sectionAnimation>
+  <section class="material-section">
     <h1>{{section}}</h1>
     <p class="section-description">{{description}}</p>
     <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
@@ -63,11 +63,13 @@
 </ng-template>
 
 <ng-template #definitionTpl let-items="items">
-  <section class="material-section" @sectionAnimation>
+  <section class="material-section">
     <h1>Definitions</h1>
-    <p class="section-description">An object with constant values and predefined objects. This can be used to define things needed in multiple actions and/or
-      states.
-      <br/> Even if it's only used in a single action or state, using definitions helps to keep actions and states small and readable</p>
+    <p class="section-description">An object with constant values and predefined objects. This can be used to define things
+      needed in multiple actions and/or states.
+      <br/> Even if it's only used in a single action or state, using definitions helps to keep actions and states small
+      and readable
+    </p>
     <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
       <div class="content">
         <h2 fxLayout="row" fxLayoutAlign="start center" (click)="pannel.toggle()">

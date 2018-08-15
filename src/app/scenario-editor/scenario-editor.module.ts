@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared';
 import { LtoFormsModule } from '@lto/forms';
@@ -12,11 +12,16 @@ import {
   MatTabsModule,
   MatCardModule
 } from '@angular/material';
+import { ShowFormDataEffect, ImportJSONEffect } from './effects';
 
 import { JsonEditorModule, VisDiagramViewerModule, D3DiagramViwerModule } from './components';
 import { FormDataModule, ImportJsonModule } from './modals';
 
 import { ScenarioEditorComponent } from './scenario-editor.component';
+
+export function noop() {
+  return function() {};
+}
 
 @NgModule({
   imports: [
@@ -36,6 +41,16 @@ import { ScenarioEditorComponent } from './scenario-editor.component';
     FormDataModule,
     ImportJsonModule
   ],
-  declarations: [ScenarioEditorComponent]
+  declarations: [ScenarioEditorComponent],
+  providers: [
+    ShowFormDataEffect,
+    ImportJSONEffect,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: noop,
+      deps: [ShowFormDataEffect, ImportJSONEffect],
+      multi: true
+    }
+  ]
 })
 export class ScenarioEditorModule {}

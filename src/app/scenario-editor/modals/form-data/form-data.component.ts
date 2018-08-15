@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'lto-form-data',
@@ -7,5 +7,5 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./form-data.component.scss']
 })
 export class FormDataComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private _dialogRef: MatDialogRef<any>) {}
 }

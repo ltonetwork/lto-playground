@@ -9,8 +9,10 @@ declare var d3: any;
   styleUrls: ['./d3-diagram-viwer.component.scss']
 })
 export class D3DiagramViwerComponent implements OnInit, OnChanges {
-  @ViewChild('svg') svgRef!: ElementRef<SVGElement>;
-  @Input() scenario!: any;
+  @ViewChild('svg')
+  svgRef!: ElementRef<SVGElement>;
+  @Input()
+  scenario!: any;
 
   isError = false;
 
