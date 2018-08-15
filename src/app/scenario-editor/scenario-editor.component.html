@@ -6,7 +6,7 @@
     </ng-container>
   </div>
   <div class="documentation-panel" fxFlex="1 1 auto">
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="reloadTabs()">
       <mat-tab label="State diagram">
         <ng-template matTabContent>
           <ng-container *ngIf="scenario$ | async as scenario">
@@ -41,7 +41,7 @@
 </div>
 
 <ng-template #materialSection let-section="section" let-description="description" let-items="items">
-  <section class="material-section" @sectionAnimation>
+  <section class="material-section">
     <h1>{{section}}</h1>
     <p class="section-description">{{description}}</p>
     <ng-container *ngFor="let item of items | keyvalue; trackBy: trackByFn">
@@ -63,7 +63,7 @@
 </ng-template>
 
 <ng-template #definitionTpl let-items="items">
-  <section class="material-section" @sectionAnimation>
+  <section class="material-section">
     <h1>Definitions</h1>
     <p class="section-description">An object with constant values and predefined objects. This can be used to define things
       needed in multiple actions and/or states.
