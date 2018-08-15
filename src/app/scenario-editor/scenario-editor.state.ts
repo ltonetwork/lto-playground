@@ -1,19 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { of, forkJoin } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { State, StateContext, Action, Selector } from '@ngxs/store';
 import { MatDialog } from '@angular/material';
-import {
-  UpdateScenario,
-  SetSchemas,
-  LoadSchemas,
-  ImportJSON,
-  DownloadJSON,
-  ShowFormData
-} from './actions';
+import { UpdateScenario, SetSchemas, LoadSchemas, DownloadJSON } from './actions';
 import { IMonacoSchema } from './interfaces';
 import { JsonSchema, DataInstructionsSchema } from './schemas';
-import { ImportJsonComponent, FormDataComponent } from './modals';
 
 export interface IScenarioEditorState {
   schemas: IMonacoSchema[] | null;
@@ -74,19 +66,6 @@ export class ScenarioEditorState {
     return forkJoin(calls).pipe(tap(schemas => ctx.dispatch(new SetSchemas({ schemas }))));
   }
 
-  @Action(ImportJSON)
-  importJSON(ctx: StateContext<IScenarioEditorState>) {
-    const dialog = this._dialog.open(ImportJsonComponent);
-
-    return dialog.afterClosed().pipe(
-      tap(data => {
-        if (data) {
-          ctx.dispatch(new UpdateScenario({ scenario: JSON.parse(data) }));
-        }
-      })
-    );
-  }
-
   @Action(DownloadJSON)
   downloadJSON(ctx: StateContext<IScenarioEditorState>) {
     const state = ctx.getState();
@@ -101,14 +80,6 @@ export class ScenarioEditorState {
     setTimeout(() => {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    });
-  }
-
-  @Action(ShowFormData)
-  showFormData(ctx: StateContext<IScenarioEditorState>, action: ShowFormData) {
-    this._dialog.open(FormDataComponent, {
-      data: action.payload.data,
-      width: '450px'
     });
   }
 }
