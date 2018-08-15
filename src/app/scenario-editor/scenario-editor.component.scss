@@ -13,6 +13,11 @@
   padding: 32px;
   overflow: auto;
 
+  @media screen and (max-width: 599px) {
+    padding: 16px;
+    padding-top: 0;
+  }
+
   pre {
     overflow: auto;
     background: #e0e0e0;
@@ -77,6 +82,10 @@ mat-tab-group {
     font-weight: 400;
     border: none;
     margin-bottom: 16px;
+
+    @media screen and (max-width: 599px) {
+      font-size: 32px;
+    }
   }
 
   p.section-description {
@@ -85,6 +94,10 @@ mat-tab-group {
     line-height: 1.6;
     margin-top: 0;
     margin-bottom: 32px;
+
+    @media screen and (max-width: 599px) {
+      font-size: 18px;
+    }
   }
 
   h2 {
@@ -101,6 +114,12 @@ mat-tab-group {
   /deep/ .mat-expansion-panel {
     border: none !important;
     margin-bottom: 0;
+
+    @media screen and (max-width: 599px) {
+      .mat-expansion-panel-body {
+        padding: 0;
+      }
+    }
   }
 
   .form-container {

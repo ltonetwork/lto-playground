@@ -5,6 +5,27 @@
   </div>
   <mat-icon *ngIf="markers && markers.length" [@showAnimation] color="error" matTooltip="You have errors in JSON">error_outline</mat-icon>
   <span fxFlex="1 1 auto"></span>
-  <button mat-button (click)="importClick()">Import</button>
-  <button mat-button (click)="exportClick()">Export</button>
+  <div fxHide fxShow.gt-xs>
+    <button mat-button (click)="importClick()">Import</button>
+    <button mat-button (click)="exportClick()">Export</button>
+  </div>
+  <button mat-icon-button [matMenuTriggerFor]="appMenu" fxShow.xs fxHide>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>code</mat-icon>
+      Show JSON
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="importClick()">
+      <mat-icon>cloud_upload</mat-icon>
+      Import JSON
+    </button>
+    <button mat-menu-item (click)="exportClick()">
+      <mat-icon>cloud_download</mat-icon>
+      Download JSON
+    </button>
+
+  </mat-menu>
 </mat-toolbar>

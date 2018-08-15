@@ -4,7 +4,9 @@ import {
   MatToolbarModule,
   MatButtonModule,
   MatIconModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatMenuModule,
+  MatDividerModule
 } from '@angular/material';
 import { AppbarComponent } from './appbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,7 +20,9 @@ import { RouterModule } from '@angular/router';
     MatTooltipModule,
     RouterModule.forChild([]),
     FlexLayoutModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    MatDividerModule
   ],
   declarations: [AppbarComponent],
   exports: [AppbarComponent]
