@@ -1,6 +1,6 @@
 <div class="scenario-editor-content" fxLayout="row">
   <div class="editor-panel" fxFlex="1 1 50" fxHide fxShow.gt-sm>
-    <div class="editor-header">scenario_namme</div>
+    <div class="editor-header"></div>
     <ng-container *ngIf="schemas$ | async as schemas">
       <lto-json-editor [schemas]="schemas" [value]="scenario$ | async" #editor (changeScenario)="scenarioChanged($event)" (markers)="updateEditrMarkers($event)"></lto-json-editor>
     </ng-container>
