@@ -252,11 +252,11 @@
       "actor": "issuer",
       "responses": {
         "ok": {
-          "title": "Completed process"
-        },
-        "update": {
-          "select": "assets.shipment.status",
-          "data": "completed"
+          "title": "Completed process",
+          "update": {
+            "select": "assets.shipment.status",
+            "data": "completed"
+          }
         }
       },
       "body": {
