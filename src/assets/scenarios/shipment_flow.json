@@ -276,9 +276,7 @@
       "$schema": "https://specs.livecontracts.io/v0.1.0/action/schema.json#http",
       "actor": "issuer",
       "responses": {
-        "ok": {
-          "title": "Notify of completed shipment"
-        }
+        "display": "never"
       },
       "url": {
         "<ref>": "assets.notification.url"
