@@ -272,7 +272,7 @@
         }
       }
     },
-    "nofity": {
+    "notify": {
       "$schema": "https://specs.livecontracts.io/v0.1.0/action/schema.json#http",
       "actor": "issuer",
       "responses": {
