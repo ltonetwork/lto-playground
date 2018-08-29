@@ -191,9 +191,9 @@
       }
     },
     "add_actors": {
-      "$schema": "https://specs.livecontracts.io/v0.1.0/action/schema.json#event",
+      "$schema": "https://specs.livecontracts.io/v0.1.0/action/schema.json#invite",
       "actor": "license_holder",
-      "body": {
+      "invitees": {
         "<apply>": {
           "ref": "[actors.transport, actors.recipient, actors.processor]",
           "query": "[].{ id: id, name: info.name, signkeys: signkeys }"
