@@ -1,4 +1,6 @@
-# LtoPlayground
+![screenshot-localhost_4200-2021 03 26-10_07_37](https://user-images.githubusercontent.com/100821/112608890-2c188e00-8e1b-11eb-9523-8b5c39f03295.png)
+
+# LTO Network Workflow Playground
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
